@@ -23,7 +23,7 @@ public class rooms extends Frame implements ActionListener {
         f = new JFrame();
         ff = new JFrame();
 
-        JTextField t = new JTextField("enter name");
+        JTextField t = new JTextField("enter name",16);
         ff.add(t);
         ff.add(b7);
         t.setVisible(true);
@@ -34,8 +34,8 @@ public class rooms extends Frame implements ActionListener {
         f.add(b4);
         f.add(b5);
 
-        f.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        ff.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        f.setLayout(new FlowLayout(FlowLayout.CENTER));
+        ff.setLayout(new FlowLayout(FlowLayout.CENTER));
         //setting flow layout of right alignment
 
         f.setSize(500, 300);
@@ -55,12 +55,16 @@ public class rooms extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b1) {
             r = new manage_room(1);
+            f.setVisible(false);
         } else if (evt.getSource() == b2) {
             r = new manage_room(2);
+            f.setVisible(false);
         } else if (evt.getSource() == b3) {
             r = new manage_room(3);
+            f.setVisible(false);
         } else if (evt.getSource() == b4) {
             r = new manage_room(4);
+            f.setVisible(false);
         } else if (evt.getSource() == b5) {
             if (d.getPoint(1) == 1) {
                 b1.setBackground(Color.red);
@@ -88,10 +92,5 @@ public class rooms extends Frame implements ActionListener {
         } else if (evt.getSource() == b7) {
             //do something
         }
-    }
-
-    public static void main(String[] args) {
-        new rooms();
-        System.out.println("aa");
     }
 }

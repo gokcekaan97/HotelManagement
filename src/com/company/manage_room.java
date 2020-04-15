@@ -23,14 +23,14 @@ public class manage_room extends Frame implements ActionListener {
         ff = new JFrame();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-
+        JTextField t = new JTextField("enter name",16);
         ff.add(t);
         ff.add(b7);
         t.setText(d.get(x));
         t.setVisible(true);
         ff.add(b6);
 
-        ff.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        ff.setLayout(new FlowLayout(FlowLayout.CENTER));
         //setting flow layout of right alignment
 
         ff.setSize(300, 300);
@@ -56,8 +56,12 @@ public class manage_room extends Frame implements ActionListener {
         if (evt.getSource() == b6) {
             System.out.print(patternList.getSelectedItem());
             d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
+            new rooms();
+            ff.setVisible(false);
         } else if (evt.getSource() == b7) {
             d.delete(x);
+            new rooms();
+            ff.setVisible(false);
         }
     }
 
