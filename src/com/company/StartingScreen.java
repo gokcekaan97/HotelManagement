@@ -20,7 +20,7 @@ public class StartingScreen extends Frame implements ActionListener{
     }
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == StaffLogin) {
-            new rooms();
+            new StaffScreen();
             frame.setVisible(false);
         }
     }
