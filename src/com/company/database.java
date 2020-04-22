@@ -6,7 +6,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-
+//Database which holds staff and reservation info.
 public class database {
 	JFrame frame;
 	JFrame frame2;

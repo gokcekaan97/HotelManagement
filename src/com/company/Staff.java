@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
+//Staff class which provides adding and deleting functionality.
 public class Staff extends Frame implements ActionListener{
 		database d=new database();
 		JFrame frame1;

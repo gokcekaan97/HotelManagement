@@ -1,11 +1,10 @@
 package com.company;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
+//Room allocating -rooms are demonstrated and colors represent the occupancy status of the rooms.
 public class rooms extends Frame implements ActionListener {
     database d = new database();
     manage_room r;

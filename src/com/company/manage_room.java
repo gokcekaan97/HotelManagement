@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.*;
 
+//Room allocating -adding database stage
 public class manage_room extends Frame implements ActionListener {
     database d = new database();
     JComboBox patternList;

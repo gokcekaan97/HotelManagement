@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
+//Main Menu which provides staff and room management of the hotel 
 public class MainMenu extends Frame implements ActionListener {
 	JFrame jf;
 	rooms r;

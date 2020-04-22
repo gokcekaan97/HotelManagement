@@ -1,10 +1,10 @@
 package com.company;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Login stage of the program 
 public class StartingScreen extends Frame implements ActionListener{
     public JButton StaffLogin;
     public JFrame frame;
