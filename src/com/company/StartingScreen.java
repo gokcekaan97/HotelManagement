@@ -4,17 +4,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//Login stage of the program 
+import static com.company.Constants.*;
+
+//Login stage of the program
 public class StartingScreen extends Frame implements ActionListener{
     public JButton StaffLogin;
     public JFrame frame;
     public StartingScreen(){
         frame = new JFrame("StartingScreen");
         StaffLogin = new JButton("Staff Login");
+        StaffLogin.setBounds(180, 100, buttonWidth, buttonHeight);
         StaffLogin.addActionListener(this);
         frame.add(StaffLogin);
-        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
-        frame.setSize(500,300);
+        frame.setLayout(null);
+        frame.setSize(frameWidth,frameHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

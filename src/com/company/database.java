@@ -6,6 +6,9 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import static com.company.Constants.frameHeight;
+import static com.company.Constants.frameWidth;
+
 //Database which holds staff and reservation info.
 public class database {
 	JFrame frame;
@@ -22,7 +25,7 @@ public class database {
 	static JTable tb;
 	Staff s;
     private Connection connect() {
-        String url = "jdbc:mysql://localhost:3306/users?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        String url = "jdbc:mysql://192.168.64.2:3306/hotel_mng?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, "root", "");
@@ -32,7 +35,7 @@ public class database {
         return conn;
     }
 
-    public void insert(int id, String name, int point, String enter, String checkout) {//insert to room
+    public void insert(int id, String name, int point, String enter, String checkout) {
         String sql = "INSERT INTO reservation(id,name,room,enter_date,chekout_date) VALUES(?,?,?,?,?)";
 
         try (Connection conn = this.connect();
@@ -64,10 +67,10 @@ public class database {
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(frame3, "Successfully added!");
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-    	
+
     }
     public void deleteStaff(String name) {
     	String sql="DELETE FROM Staff where name=?";
@@ -81,27 +84,27 @@ public class database {
 				int status=stmt.executeUpdate();
 				if(status==1)
 					JOptionPane.showMessageDialog(frame3, "Successfully deleted!");
-				else 
+				else
 					JOptionPane.showMessageDialog(frame3, "Staff not found!","Failed",JOptionPane.ERROR_MESSAGE);
-			} 				
+			}
     	} catch (SQLException e) {
 			e.printStackTrace();
 		}
     }
     public void retrieveTableData() {
     	frame = new JFrame("Staff Info");
-    	frame.setLayout(new BorderLayout()); 
+    	frame.setLayout(new BorderLayout());
     	DefaultTableModel model = new DefaultTableModel();
     	model.setColumnIdentifiers(columnNames);
     	tb = new JTable();
-    	tb.setModel(model); 
+    	tb.setModel(model);
     	tb.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     	tb.setFillsViewportHeight(true);
     	JScrollPane scroll = new JScrollPane(tb);
     	scroll.setHorizontalScrollBarPolicy(
     	JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     	scroll.setVerticalScrollBarPolicy(
-    	JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
+    	JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     	String name= "";
     	String surname= "";
     	int age;
@@ -110,7 +113,7 @@ public class database {
     	int num_of_off_days;
     	try {
     	Connection con = this.connect();
-    	String sql = "select * from Staff"; 
+    	String sql = "select * from Staff";
     	PreparedStatement ps = con.prepareStatement(sql);
     	ResultSet rs = ps.executeQuery();
     	int i =0;
@@ -123,7 +126,7 @@ public class database {
     	salary=rs.getDouble("salary");
     	num_of_off_days=rs.getInt("offdays");
     	model.addRow(new Object[]{name,surname, age,gender,salary,num_of_off_days});
-    	i++; 
+    	i++;
     	}
     	if(i <1)
     	{
@@ -146,10 +149,10 @@ public class database {
     	}
     	frame.add(scroll);
     	frame.setVisible(true);
-    	frame.setSize(400,300);
+    	frame.setSize(frameWidth,frameHeight);
     }
 
-    public int getPoint(int id) {//used in room full or empty
+    public int getPoint(int id) {
 
         int x = 0;
         try (Connection conn = this.connect();
@@ -157,7 +160,7 @@ public class database {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select id from reservation where room='" + id + "' ");
             while (rs.next()) {
-                System.out.println("room " + id + " full");
+                System.out.println("room " + id + " fll");
                 x = rs.getInt(1);
             }
         } catch (SQLException e) {
@@ -180,7 +183,7 @@ public class database {
     }
     String name;
 
-    public String get(int id) {//showing customer names in textboxes in room class
+    public String get(int id) {
         String query = "SELECT * FROM reservation where room='" + id + "'";
         try (Connection conn = this.connect();
         ) {

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import static com.company.Constants.*;
+
 //Room allocating -rooms are demonstrated and colors represent the occupancy status of the rooms.
 public class rooms extends Frame implements ActionListener {
     database d = new database();
@@ -37,10 +39,17 @@ public class rooms extends Frame implements ActionListener {
         ff.setLayout(new FlowLayout(FlowLayout.CENTER));
         //setting flow layout of right alignment
 
-        f.setSize(500, 300);
-        ff.setSize(500, 300);
+        f.setSize(frameWidth, frameHeight);
+        ff.setSize(frameWidth, frameHeight);
         ff.setVisible(false);
         f.setVisible(true);
+        b1.setBounds(30, 50, buttonWidth, buttonHeight);
+        b1.setBounds(60, 50, buttonWidth, buttonHeight);
+        b1.setBounds(90, 50, buttonWidth, buttonHeight);
+        b1.setBounds(120, 50, buttonWidth, buttonHeight);
+        b1.setBounds(150, 50, buttonWidth, buttonHeight);
+        b1.setBounds(180, 50, buttonWidth, buttonHeight);
+        b1.setBounds(210, 50, buttonWidth, buttonHeight);
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);

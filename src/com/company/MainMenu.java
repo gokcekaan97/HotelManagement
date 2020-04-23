@@ -4,9 +4,11 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
-//Main Menu which provides staff and room management of the hotel 
+import static com.company.Constants.*;
+
+//Main Menu which provides staff and room management of the hotel
 public class MainMenu extends Frame implements ActionListener {
-	JFrame jf;
+	static JFrame jf;
 	rooms r;
 	Staff s;
 	database d=new database();
@@ -15,11 +17,11 @@ public class MainMenu extends Frame implements ActionListener {
 
 	MainMenu(){
 		jf=new JFrame("Hotel Management System");
-		b1.setBounds(100,100,200,100);
-		b2.setBounds(100,200,200,100);
+		b1.setBounds(120,40,buttonWidth, buttonHeight);
+		b2.setBounds(120,120,buttonWidth, buttonHeight);
 		jf.add(b1);
 		jf.add(b2);
-		jf.setSize(500,500);
+		jf.setSize(frameWidth, frameHeight);
 		jf.setLayout(null);
 		jf.setVisible(true);
 		b1.addActionListener(this);
@@ -29,9 +31,11 @@ public class MainMenu extends Frame implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 		if(evt.getSource()==b1) {
 			r=new rooms();
+			jf.setVisible(false);
 		}
 		if(evt.getSource()==b2) {
 			new Staff();
+			jf.setVisible(false);
 		}
 	}
 }

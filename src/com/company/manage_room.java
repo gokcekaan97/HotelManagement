@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.*;
 
+import static com.company.Constants.frameHeight;
+import static com.company.Constants.frameWidth;
+
 //Room allocating -adding database stage
 public class manage_room extends Frame implements ActionListener {
     database d = new database();
@@ -18,30 +21,26 @@ public class manage_room extends Frame implements ActionListener {
     JButton b6 = new JButton("add");
     JButton b7 = new JButton("delete");
     JTextField t = new JTextField("enter name",16);
-    
+
     manage_room(int x) {
         this.x = x;
         ff = new JFrame();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        
         ff.add(t);
-        ff.add(b6);
         ff.add(b7);
         t.setText(d.get(x));
         t.setVisible(true);
-        
+        ff.add(b6);
 
         ff.setLayout(new FlowLayout(FlowLayout.CENTER));
         //setting flow layout of right alignment
 
-        ff.setSize(400, 300);
+        ff.setSize(frameWidth, frameHeight);
         ff.setVisible(true);
 
         b6.addActionListener(this);
-        
         b7.addActionListener(this);
-        
         String[] patternExamples = {
         		dtf.format(now)
         };
@@ -70,6 +69,6 @@ public class manage_room extends Frame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        
+        System.out.println("aa");
     }
 }
