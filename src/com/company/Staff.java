@@ -95,6 +95,7 @@ public class Staff extends Frame implements ActionListener {
         frame1.add(button5);
 
         frame2.add(backButtonForFrame2);
+        frame2.add(button2);
         frame2.add(textbox1);
         frame2.add(textbox2);
         frame2.add(textbox3);
