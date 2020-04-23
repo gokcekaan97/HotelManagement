@@ -149,7 +149,7 @@ public class database {
     	frame.setSize(400,300);
     }
 
-    public int getPoint(int id) {
+    public int getPoint(int id) {//used in room full or empty
 
         int x = 0;
         try (Connection conn = this.connect();
@@ -180,7 +180,7 @@ public class database {
     }
     String name;
 
-    public String get(int id) {
+    public String get(int id) {//showing customer names in textboxes in room class
         String query = "SELECT * FROM reservation where room='" + id + "'";
         try (Connection conn = this.connect();
         ) {

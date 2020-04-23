@@ -17,28 +17,31 @@ public class manage_room extends Frame implements ActionListener {
 
     JButton b6 = new JButton("add");
     JButton b7 = new JButton("delete");
-    JTextField t = new JTextField("enter name");
-
+    JTextField t = new JTextField("enter name",16);
+    
     manage_room(int x) {
         this.x = x;
         ff = new JFrame();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        JTextField t = new JTextField("enter name",16);
+        
         ff.add(t);
+        ff.add(b6);
         ff.add(b7);
         t.setText(d.get(x));
         t.setVisible(true);
-        ff.add(b6);
+        
 
         ff.setLayout(new FlowLayout(FlowLayout.CENTER));
         //setting flow layout of right alignment
 
-        ff.setSize(300, 300);
+        ff.setSize(400, 300);
         ff.setVisible(true);
 
         b6.addActionListener(this);
+        
         b7.addActionListener(this);
+        
         String[] patternExamples = {
         		dtf.format(now)
         };
