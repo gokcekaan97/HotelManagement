@@ -32,7 +32,7 @@ public class database {
         return conn;
     }
 
-    public void insert(int id, String name, int point, String enter, String checkout) {
+    public void insert(int id, String name, int point, String enter, String checkout) {//insert to room
         String sql = "INSERT INTO reservation(id,name,room,enter_date,chekout_date) VALUES(?,?,?,?,?)";
 
         try (Connection conn = this.connect();
@@ -157,7 +157,7 @@ public class database {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select id from reservation where room='" + id + "' ");
             while (rs.next()) {
-                System.out.println("room " + id + " fll");
+                System.out.println("room " + id + " full");
                 x = rs.getInt(1);
             }
         } catch (SQLException e) {
