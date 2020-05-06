@@ -61,8 +61,8 @@ public class StartingScreen extends Frame implements ActionListener{
     }
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == loginbutton) {
-        	if(username.getText().contentEquals(d.getUserName())
-        	   &&password.getText().contentEquals(d.getPassword())) 
+        	if(username.getText().contentEquals(d.getUserName(username.getText()))
+                    &&password.getText().contentEquals(d.getPassword(password.getText())))
         	{   frame.setVisible(false);
         		new MainMenu();
         		JOptionPane.showMessageDialog(dialogframe,"Successfully logged in.");

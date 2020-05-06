@@ -60,9 +60,8 @@ public class database {
                 System.out.println(e.getMessage());
             }
         }
-    	public String getUserName() {
+    	public String getUserName(String username) {
     		String query="SELECT * FROM users";
-    		String username="";
             try (Connection conn = this.connect();
             ) {
                 Statement stmt = conn.createStatement();
@@ -70,16 +69,15 @@ public class database {
                 while (rs.next()) {
                     username = rs.getString("username");
 
-       }
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
             return username;
         }
     	
-    	public String getPassword() {
+    	public String getPassword(String password) {
     		String query="SELECT * FROM users";
-    		String password="";
             try {Connection conn = this.connect(); {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
