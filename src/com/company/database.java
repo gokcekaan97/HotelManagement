@@ -25,7 +25,7 @@ public class database {
 	static JTable tb;
 	Staff s;
     private Connection connect() {
-        String url = "jdbc:mysql://192.168.64.2:3306/hotel_mng?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        String url = "jdbc:mysql://localhost:3306/users?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, "root", "");
@@ -34,6 +34,67 @@ public class database {
         }
         return conn;
     }
+    public void registerUser(int id,String username,String password,String usertype,String name,String surname,int age,String gender,String address) {
+    	String sql="INSERT INTO users(id,username,password,usertypes,name,surname,age,gender,address)"
+    			+ "VALUES(?,?,?,?,?,?,?,?,?)";
+    	
+    	 try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)
+            ) {
+    		 	pstmt.setInt(1,id);
+                pstmt.setString(2, username);
+                pstmt.setString(3, password);
+                pstmt.setString(4, usertype);
+                pstmt.setString(5, name);
+                pstmt.setString(6, surname);
+                pstmt.setInt(7,age);
+                pstmt.setString(8,gender);
+                pstmt.setString(9,address);
+                int status=pstmt.executeUpdate();
+                if(status==1)
+                System.out.println("Successfully registered.");
+                else
+                System.out.println("Registration failed!");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    	public String getUserName() {
+    		String query="SELECT * FROM users";
+    		String username="";
+            try (Connection conn = this.connect();
+            ) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    username = rs.getString("username");
+
+       }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return username;
+        }
+    	
+    	public String getPassword() {
+    		String query="SELECT * FROM users";
+    		String password="";
+            try {Connection conn = this.connect(); {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    password = rs.getString("password");
+
+                           }
+                    }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return password;
+        }
+  	
+    	
 
     public void insert(int id, String name, int point, String enter, String checkout) {
         String sql = "INSERT INTO reservation(id,name,room,enter_date,chekout_date) VALUES(?,?,?,?,?)";

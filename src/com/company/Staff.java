@@ -150,8 +150,8 @@ public class Staff extends Frame implements ActionListener {
         }
         if (evt.getSource() == button2) {
             d.addStaff(textbox1.getText(), textbox2.getText(), Integer.parseInt(textbox3.getText()),
-                    choice1.isSelected() ? choice1.getText() : choice2.getText(),
-                    Double.parseDouble(textbox4.getText()), Integer.parseInt(textbox5.getText()));
+            choice1.isSelected() ? choice1.getText() : choice2.getText(),
+            Double.parseDouble(textbox4.getText()), Integer.parseInt(textbox5.getText()));
         }
 		if (evt.getSource() == button1) {
 			frame1.setVisible(false);
