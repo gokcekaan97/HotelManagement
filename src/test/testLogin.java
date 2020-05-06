@@ -21,16 +21,16 @@ public class testLogin {
 	public void testLoginDetails_Positive() {
 		d.registerUser(id,username, password, usertype, name, surname, age, gender, address);
 		//The user should be able to register.
-		assertTrue((d.getUserName(name).contentEquals("brsgoc")
-		&&d.getPassword(password).contentEquals("1234"))?true:false);
+		assertTrue(d.getUserName(name)
+				&& d.getPassword(password));
 		}
 	@Test
 	public void testLoginDetails_Negative() {
 		String username="bgoc";String password="2345";
 		d.registerUser(id,username, password, usertype, name, surname, age, gender, address);
 		//The user shouldn't be able to register.Because id is not unique.
-		assertFalse((d.getUserName(name).contentEquals("bgoc")
-			&&d.getPassword(password).contentEquals("1234"))?true:false);
+		assertFalse(d.getUserName("bgoc")
+				&& d.getPassword("1234"));
 	}
 
 }

@@ -40,7 +40,8 @@ public class database {
     	
     	 try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)
-            ) {
+            )
+         {
     		 	pstmt.setInt(1,id);
                 pstmt.setString(2, username);
                 pstmt.setString(3, password);
@@ -60,36 +61,38 @@ public class database {
                 System.out.println(e.getMessage());
             }
         }
-    	public String getUserName(String username) {
-    		String query="SELECT * FROM users";
+    	public boolean getUserName(String username) {
+            boolean flag = false;
+    		String query="SELECT * FROM users WHERE username ='"+username+"'";
             try (Connection conn = this.connect();
             ) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    username = rs.getString("username");
-
+                if (rs.next()){
+                    flag = true;
                 }
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            return username;
+            return flag;
         }
     	
-    	public String getPassword(String password) {
-    		String query="SELECT * FROM users";
-            try {Connection conn = this.connect(); {
+    	public boolean getPassword(String password) {
+            boolean flag = false;
+    		String query="SELECT * FROM users WHERE password ='"+password+"'";
+            try (Connection conn = this.connect()) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    password = rs.getString("password");
+                if (rs.next()){
+                    flag = true;
+                }
+            }
 
-                           }
-                    }
-            } catch (SQLException e) {
+            catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            return password;
+            return flag;
         }
   	
     	
