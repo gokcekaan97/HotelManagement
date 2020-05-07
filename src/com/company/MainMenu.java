@@ -30,7 +30,7 @@ public class MainMenu extends Frame implements ActionListener {
 		b2.addActionListener(this);
 		b3.addActionListener(this);
 		}
-
+	//Actions performed when pressed room management, staff management and logout
 	public void actionPerformed(ActionEvent evt) {
 		if(evt.getSource()==b1) {
 			r=new rooms();

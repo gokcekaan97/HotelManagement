@@ -23,7 +23,7 @@ public class RegisterScreen extends Frame implements ActionListener {
 	public JTextField username;
 	public JPasswordField password;
 	public static JComboBox utype;
-	public static String[] utypes= {"Admin","Staff"};
+	public static String[] utypes= {"Customer","Admin","Staff"};
 	public JTextField name;
 	public JTextField surname;
 	public JTextField age;
@@ -91,33 +91,38 @@ public class RegisterScreen extends Frame implements ActionListener {
 		registerframe.add(gender_female);
 		registerframe.add(address);
 		registerframe.add(registerbutton);
-		if(tp.getSelectedIndex()==1) {
-			registerframe.add(usertypelabel);
-			registerframe.add(utype);
-		}
-		else {
-			registerframe.add(usertypelabel);
-			registerframe.add(customerlabel);
-			
-		}
+		registerframe.add(usertypelabel);
+		registerframe.add(utype);
 		registerframe.setLayout(null);
 		registerframe.setVisible(true);
 		registerbutton.addActionListener(this);
 		}
+	//Actions performed when pressed register button.
 	public void actionPerformed(ActionEvent e) {
 		String strRegEx = "^(?=.*[0-9]).{8,15}$";
 		int id=generateID();
 		if(e.getSource()==registerbutton) {
 			if(password.getText().matches(strRegEx)) {
-				d.registerUser(id,username.getText(),password.getText(),
-			    tp.getSelectedIndex()==1?(String)utype.getSelectedItem():customerlabel.getText(),
-				name.getText(),surname.getText(),Integer.parseInt(age.getText()),
-			    gender_male.isSelected()?gender_male.getText():gender_female.getText(),
-			    address.getText());
-				registerframe.setVisible(false);
-				frame.setVisible(true);
+				if(utype.getSelectedItem()=="Customer") {
+					d.registerCustomer(id,username.getText(),password.getText(),"Customer",
+					name.getText(),surname.getText(),Integer.parseInt(age.getText()),
+				    gender_male.isSelected()?gender_male.getText():gender_female.getText(),
+				    address.getText());
+					registerframe.setVisible(false);
+					frame.setVisible(true);
 		}
+				else if(utype.getSelectedItem()=="Admin"||utype.getSelectedItem()=="Staff") {
+					d.registerEmployee(id,username.getText(),password.getText(),
+					(String)utype.getSelectedItem(),
+					name.getText(),surname.getText(),Integer.parseInt(age.getText()),
+					gender_male.isSelected()?gender_male.getText():gender_female.getText(),
+				    address.getText());
+					registerframe.setVisible(false);
+					frame.setVisible(true);
+				}
+			}
 			else
+				//The password should satisfy the following rules.
 				System.out.println("Your password is not valid to register.Check the following:\n"
 						+ "1)Password must contain at least 8 characters\r\n" + 
 						  "2) Password must contain at least 1 number\r\n" + 
@@ -126,7 +131,8 @@ public class RegisterScreen extends Frame implements ActionListener {
 						  "5) Password must contain at least 1 special character\r\n" + 
 						  "6) Password must not contain any spaces");
 	}
-}
+	}
+	//ID generation for users
 	public static int generateID() {
 		Random rand=new Random();
 		int number=1+rand.nextInt(99);

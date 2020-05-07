@@ -8,7 +8,7 @@ import static com.company.RegisterScreen.*;
 public class testLogin {
 		String username="brsgoc";
 	    String password="1234";
-	    String usertype="Admin";
+	    String usertype="Customer";
 	    String name="baris";
 	    String surname="goc";
 	    int age=24;
@@ -19,18 +19,18 @@ public class testLogin {
 	    
 	@Test
 	public void testLoginDetails_Positive() {
-		d.registerUser(id,username, password, usertype, name, surname, age, gender, address);
+		d.registerCustomer(id,username, password, usertype, name, surname, age, gender, address);
 		//The user should be able to register.
-		assertTrue(d.CheckCustomerUserName(name)
+		assertTrue(d.CheckCustomerUserName(username)
 				&& d.CheckCustomerPassword(password));
 		}
 	@Test
 	public void testLoginDetails_Negative() {
 		String username="bgoc";String password="2345";
-		d.registerUser(id,username, password, usertype, name, surname, age, gender, address);
+		d.registerCustomer(id,username, password, usertype, name, surname, age, gender, address);
 		//The user shouldn't be able to register.Because id is not unique.
-		assertFalse(d.CheckCustomerUserName("bgoc")
-				&& d.CheckCustomerPassword("1234"));
+		assertFalse(d.CheckCustomerUserName(username)
+				&& d.CheckCustomerPassword(password));
 	}
 
 }

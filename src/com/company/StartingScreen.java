@@ -59,6 +59,7 @@ public class StartingScreen extends Frame implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+    //
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == loginbutton) {
             if (tp.getSelectedIndex()==0) {
@@ -66,7 +67,7 @@ public class StartingScreen extends Frame implements ActionListener{
                         && d.CheckCustomerPassword(password.getText())) {
                     frame.setVisible(false);
                     //new customer screen will be called here.
-                    JOptionPane.showMessageDialog(dialogframe, "Successfully logged in.");
+                    JOptionPane.showMessageDialog(dialogframe, "Successfully logged in");
                 } else {
                     JOptionPane.showMessageDialog(dialogframe, "Wrong username or password.");
                 }

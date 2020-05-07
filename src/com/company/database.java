@@ -34,7 +34,7 @@ public class database {
         }
         return conn;
     }
-    public void registerUser(int id,String username,String password,String usertype,String name,String surname,int age,String gender,String address) {
+    public void registerCustomer(int id,String username,String password,String usertype,String name,String surname,int age,String gender,String address) {
     	String sql="INSERT INTO users(id,username,password,usertypes,name,surname,age,gender,address)"
     			+ "VALUES(?,?,?,?,?,?,?,?,?)";
     	
@@ -61,6 +61,34 @@ public class database {
                 System.out.println(e.getMessage());
             }
         }
+    public void registerEmployee(int id,String username,String password,String usertype,String name,String surname,int age,String gender,String address) {
+    	String sql="INSERT INTO employee(id,username,password,usertype,name,surname,age,gender,address)"
+    			+ "VALUES(?,?,?,?,?,?,?,?,?)";
+    	
+    	 try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)
+            )
+         {
+    		 	pstmt.setInt(1,id);
+                pstmt.setString(2, username);
+                pstmt.setString(3, password);
+                pstmt.setString(4, usertype);
+                pstmt.setString(5, name);
+                pstmt.setString(6, surname);
+                pstmt.setInt(7,age);
+                pstmt.setString(8,gender);
+                pstmt.setString(9,address);
+                int status=pstmt.executeUpdate();
+                if(status==1)
+                System.out.println("Successfully registered.");
+                else
+                System.out.println("Registration failed!");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    
     	public boolean CheckCustomerUserName(String username) {
             boolean flag = false;
     		String query="SELECT * FROM users WHERE username ='"+username+"'";

@@ -59,7 +59,6 @@ public class rooms extends Frame implements ActionListener {
         b7.addActionListener(this);
 
     }
-
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b1) {
             r = new manage_room(1);

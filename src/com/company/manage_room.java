@@ -54,7 +54,7 @@ public class manage_room extends Frame implements ActionListener {
         patternList1.addActionListener(this);
         ff.add(patternList1);
     }
-
+    //
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b6) {
             System.out.print(patternList.getSelectedItem());
