@@ -5,12 +5,13 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import static com.company.Constants.*;
+import static com.company.MainMenu.jf;
 
 //Room allocating -rooms are demonstrated and colors represent the occupancy status of the rooms.
 public class rooms extends Frame implements ActionListener {
     database d = new database();
     manage_room r;
-    JFrame f;
+    static JFrame roomsJframe;
     JFrame ff;
     JButton b1 = new JButton("1");
     JButton b2 = new JButton("2");
@@ -19,37 +20,44 @@ public class rooms extends Frame implements ActionListener {
     JButton b5 = new JButton("check room");
     JButton b6 = new JButton("add");
     JButton b7 = new JButton("delete");
+    JButton backButtonForFrameF = new JButton("Back");
+
 
     rooms() {
-        f = new JFrame();
+        roomsJframe = new JFrame();
         ff = new JFrame();
 
-        JTextField t = new JTextField("enter name",16);
+        JTextField t = new JTextField("enter name", 16);
+
         ff.add(t);
         ff.add(b7);
         t.setVisible(true);
         ff.add(b6);
-        f.add(b1);
-        f.add(b2);
-        f.add(b3);
-        f.add(b4);
-        f.add(b5);
+        roomsJframe.add(backButtonForFrameF);
+        roomsJframe.add(b1);
+        roomsJframe.add(b2);
+        roomsJframe.add(b3);
+        roomsJframe.add(b4);
+        roomsJframe.add(b5);
 
-        f.setLayout(new FlowLayout(FlowLayout.CENTER));
-        ff.setLayout(new FlowLayout(FlowLayout.CENTER));
+        roomsJframe.setLayout(null);
+
         //setting flow layout of right alignment
 
-        f.setSize(frameWidth, frameHeight);
+        roomsJframe.setSize(frameWidth, frameHeight);
         ff.setSize(frameWidth, frameHeight);
         ff.setVisible(false);
-        f.setVisible(true);
-        b1.setBounds(30, 50, buttonWidth, buttonHeight);
-        b1.setBounds(60, 50, buttonWidth, buttonHeight);
-        b1.setBounds(90, 50, buttonWidth, buttonHeight);
-        b1.setBounds(120, 50, buttonWidth, buttonHeight);
-        b1.setBounds(150, 50, buttonWidth, buttonHeight);
-        b1.setBounds(180, 50, buttonWidth, buttonHeight);
-        b1.setBounds(210, 50, buttonWidth, buttonHeight);
+        roomsJframe.setVisible(true);
+        backButtonForFrameF.setBounds(30, 30, buttonRoomWidth, buttonRoomHeight);
+        b1.setBounds(30, 75, buttonRoomWidth, buttonRoomHeight);
+        b2.setBounds(100, 75, buttonRoomWidth, buttonRoomHeight);
+        b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
+        b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
+        b5.setBounds(310, 75, 130, buttonRoomHeight);
+        t.setBounds(310, 100, 130, buttonRoomHeight);
+        b6.setBounds(310, 100, buttonRoomWidth, buttonRoomHeight);
+        b7.setBounds(210, 100, buttonRoomWidth, buttonRoomHeight);
+        backButtonForFrameF.addActionListener(this);
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);
@@ -58,46 +66,68 @@ public class rooms extends Frame implements ActionListener {
         b6.addActionListener(this);
         b7.addActionListener(this);
 
+        //for macs
+       /* b1.setOpaque(true);
+        b2.setOpaque(true);
+        b3.setOpaque(true);
+        b4.setOpaque(true);
+        b1.setBorderPainted(false);
+        b2.setBorderPainted(false);
+        b3.setBorderPainted(false);
+        b4.setBorderPainted(false);
+        b1.setFocusPainted(true);
+        b2.setFocusPainted(true);
+        b3.setFocusPainted(true);
+        b4.setFocusPainted(true);
+        b1.setMargin(new Insets(0, 0, 0, 0));
+        b2.setMargin(new Insets(0, 0, 0, 0));
+        b3.setMargin(new Insets(0, 0, 0, 0));
+        b4.setMargin(new Insets(0, 0, 0, 0));*/
+
     }
+
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b1) {
             r = new manage_room(1);
-            f.setVisible(false);
+            roomsJframe.setVisible(false);
         } else if (evt.getSource() == b2) {
             r = new manage_room(2);
-            f.setVisible(false);
+            roomsJframe.setVisible(false);
         } else if (evt.getSource() == b3) {
             r = new manage_room(3);
-            f.setVisible(false);
+            roomsJframe.setVisible(false);
         } else if (evt.getSource() == b4) {
             r = new manage_room(4);
-            f.setVisible(false);
+            roomsJframe.setVisible(false);
         } else if (evt.getSource() == b5) {
             if (d.getPoint(1) == 1) {
-                b1.setBackground(Color.red);
+                b1.setForeground(Color.red);
             } else {
-                b1.setBackground(Color.green);
+                b1.setForeground(Color.green);
             }
             if (d.getPoint(2) == 2) {
-                b2.setBackground(Color.red);
+                b2.setForeground(Color.red);
             } else {
-                b2.setBackground(Color.green);
+                b2.setForeground(Color.green);
             }
             if (d.getPoint(3) == 3) {
 
-                b3.setBackground(Color.red);
+                b3.setForeground(Color.red);
             } else {
-                b3.setBackground(Color.green);
+                b3.setForeground(Color.green);
             }
             if (d.getPoint(4) == 4) {
-                b4.setBackground(Color.red);
+                b4.setForeground(Color.red);
             } else {
-                b4.setBackground(Color.green);
+                b4.setForeground(Color.green);
             }
         } else if (evt.getSource() == b6) {
             //do something
         } else if (evt.getSource() == b7) {
             //do something
+        } else if (evt.getSource() == backButtonForFrameF) {
+            roomsJframe.setVisible(false);
+            jf.setVisible(true);
         }
     }
 }
