@@ -9,4 +9,6 @@ public class Constants {
     public final static int labelHeight=30;
     public final static int textWidth=labelWidth;
     public final static int textHeight=labelHeight;
+    public final static int buttonRoomWidth = 50;
+    public final static int buttonRoomHeight = 20;
 }
