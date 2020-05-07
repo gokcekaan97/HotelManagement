@@ -36,20 +36,20 @@ public class StartingScreen extends Frame implements ActionListener{
         passwordlabel.setBounds(50,80,200,30);
         loginbutton = new JButton("Login");
         registerbutton=new JButton("Register");
-        registerbutton.setBounds(160,195, buttonWidth, buttonHeight);
+        registerbutton.setBounds(148,170, buttonWidth, buttonHeight);
         loginbutton.setBounds(160, 140, buttonWidth, buttonHeight);
         loginbutton.addActionListener(this);
         registerbutton.addActionListener(this);    
-        p1=new JPanel();        
+        p1=new JPanel();
         p1.setLayout(null);
+        p1.add(registerbutton);
         p2=new JPanel();
-        p2.setBackground(Color.LIGHT_GRAY);       
+        p2.setBackground(Color.LIGHT_GRAY);
         frame.add(username);
         frame.add(password);
         frame.add(usernamelabel);
         frame.add(passwordlabel);
         frame.add(loginbutton);
-        frame.add(registerbutton);
         frame.add(tp);
         tp.addTab("Customer",p1);
         tp.addTab("Admin/Staff", p2);
@@ -61,24 +61,32 @@ public class StartingScreen extends Frame implements ActionListener{
     }
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == loginbutton) {
-            System.out.println(username.getText());
-            System.out.println(password.getText());
-            System.out.println(d.getUserName(username.getText()));
-            System.out.println(d.getPassword(password.getText()));
-        	if(d.getUserName(username.getText())
-                    &&d.getPassword(password.getText()))
-        	{   frame.setVisible(false);
-        		new MainMenu();
-        		JOptionPane.showMessageDialog(dialogframe,"Successfully logged in.");
-        	}
-        		else {
-        		JOptionPane.showMessageDialog(dialogframe,"Wrong username or password.");
-        		}
-        	}
+            if (tp.getSelectedIndex()==0) {
+                if (d.CheckCustomerUserName(username.getText())
+                        && d.CheckCustomerPassword(password.getText())) {
+                    frame.setVisible(false);
+                    //new customer screen will be called here.
+                    JOptionPane.showMessageDialog(dialogframe, "Successfully logged in.");
+                } else {
+                    JOptionPane.showMessageDialog(dialogframe, "Wrong username or password.");
+                }
+            }
+            if (tp.getSelectedIndex()==1){
+                if (d.CheckEmployeeUserName(username.getText())
+                        && d.CheckEmployeePassword(password.getText())){
+                    frame.setVisible(false);
+                    new MainMenu();
+                    JOptionPane.showMessageDialog(dialogframe, "Successfully logged in.");
+                } else {
+                    JOptionPane.showMessageDialog(dialogframe, "Wrong username or password.");
+                }
+            }
+        }
         if(evt.getSource()==registerbutton) {
-        	frame.setVisible(false);
-        	new RegisterScreen();
-        	
+            if(tp.getSelectedIndex()==0) {
+                frame.setVisible(false);
+                new RegisterScreen();
+            }
         }
     }
 }

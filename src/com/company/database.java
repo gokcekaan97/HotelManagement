@@ -61,7 +61,7 @@ public class database {
                 System.out.println(e.getMessage());
             }
         }
-    	public boolean getUserName(String username) {
+    	public boolean CheckCustomerUserName(String username) {
             boolean flag = false;
     		String query="SELECT * FROM users WHERE username ='"+username+"'";
             try (Connection conn = this.connect();
@@ -77,10 +77,42 @@ public class database {
             }
             return flag;
         }
+        public boolean CheckEmployeeUserName(String username) {
+            boolean flag = false;
+            String query="SELECT * FROM employee WHERE username ='"+username+"'";
+            try (Connection conn = this.connect();
+            ) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    flag = true;
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return flag;
+        }
     	
-    	public boolean getPassword(String password) {
+    	public boolean CheckCustomerPassword(String password) {
             boolean flag = false;
     		String query="SELECT * FROM users WHERE password ='"+password+"'";
+            try (Connection conn = this.connect()) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    flag = true;
+                }
+            }
+
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return flag;
+        }
+        public boolean CheckEmployeePassword(String password) {
+            boolean flag = false;
+            String query="SELECT * FROM employee WHERE password ='"+password+"'";
             try (Connection conn = this.connect()) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
