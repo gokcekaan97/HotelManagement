@@ -22,8 +22,6 @@ public class RegisterScreen extends Frame implements ActionListener {
 	public JLabel addresslabel;
 	public JTextField username;
 	public JPasswordField password;
-	public static JComboBox utype;
-	public static String[] utypes= {"Customer","Admin","Staff"};
 	public JTextField name;
 	public JTextField surname;
 	public JTextField age;
@@ -59,8 +57,6 @@ public class RegisterScreen extends Frame implements ActionListener {
 		username.setBounds(130, 40, 200,30);
 		password=new JPasswordField();
 		password.setBounds(130, 80, 200,30);
-		utype=new JComboBox(utypes);
-		utype.setBounds(130,120,200,30);
 		name=new JTextField();
 		name.setBounds(130,160,200,30);
 		surname=new JTextField();
@@ -92,7 +88,6 @@ public class RegisterScreen extends Frame implements ActionListener {
 		registerframe.add(address);
 		registerframe.add(registerbutton);
 		registerframe.add(usertypelabel);
-		registerframe.add(utype);
 		registerframe.setLayout(null);
 		registerframe.setVisible(true);
 		registerbutton.addActionListener(this);
@@ -103,23 +98,12 @@ public class RegisterScreen extends Frame implements ActionListener {
 		int id=generateID();
 		if(e.getSource()==registerbutton) {
 			if(password.getText().matches(strRegEx)) {
-				if(utype.getSelectedItem()=="Customer") {
-					d.registerCustomer(id,username.getText(),password.getText(),"Customer",
-					name.getText(),surname.getText(),Integer.parseInt(age.getText()),
-				    gender_male.isSelected()?gender_male.getText():gender_female.getText(),
-				    address.getText());
-					registerframe.setVisible(false);
-					frame.setVisible(true);
-		}
-				else if(utype.getSelectedItem()=="Admin"||utype.getSelectedItem()=="Staff") {
-					d.registerEmployee(id,username.getText(),password.getText(),
-					(String)utype.getSelectedItem(),
-					name.getText(),surname.getText(),Integer.parseInt(age.getText()),
-					gender_male.isSelected()?gender_male.getText():gender_female.getText(),
-				    address.getText());
-					registerframe.setVisible(false);
-					frame.setVisible(true);
-				}
+				d.registerCustomer(id,username.getText(),password.getText(),
+						name.getText(),surname.getText(),Integer.parseInt(age.getText()),
+						gender_male.isSelected()?gender_male.getText():gender_female.getText(),
+						address.getText());
+				registerframe.setVisible(false);
+				frame.setVisible(true);
 			}
 			else
 				//The password should satisfy the following rules.

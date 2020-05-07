@@ -36,7 +36,7 @@ public class StartingScreen extends Frame implements ActionListener{
         passwordlabel.setBounds(50,80,200,30);
         loginbutton = new JButton("Login");
         registerbutton=new JButton("Register");
-        registerbutton.setBounds(140,160, buttonWidth, buttonHeight);
+        registerbutton.setBounds(148,170, buttonWidth, buttonHeight);
         loginbutton.setBounds(160, 140, buttonWidth, buttonHeight);
         loginbutton.addActionListener(this);
         registerbutton.addActionListener(this);
