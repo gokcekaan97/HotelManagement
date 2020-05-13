@@ -21,8 +21,8 @@ public class rooms extends Frame implements ActionListener {
     JButton b5 = new JButton("check room");
     JButton b6 = new JButton("search");
     JButton backButtonForFrameF = new JButton("Back");
-    
-
+    JComboBox serch_box ;
+    String s1[] = { "all", "1 person", "2 person" };
     rooms() {
         roomsJframe = new JFrame();
         ff = new JFrame();
@@ -40,10 +40,12 @@ public class rooms extends Frame implements ActionListener {
         roomsJframe.add(b4);
         roomsJframe.add(b5);
         roomsJframe.add(b6);
-        roomsJframe.add(tt);
+        
+        
         roomsJframe.setLayout(null);
-
+        serch_box= new JComboBox(s1);
         //setting flow layout of right alignment
+        roomsJframe.add(serch_box);
 
         roomsJframe.setSize(frameWidth, frameHeight);
         ff.setSize(frameWidth, frameHeight);
@@ -55,8 +57,9 @@ public class rooms extends Frame implements ActionListener {
         b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
         b5.setBounds(310, 75, 130, buttonRoomHeight);
-        b6.setBounds(380, 75, 130, buttonRoomHeight);
-        tt.setBounds(310, 100, 130, buttonRoomHeight);
+        b6.setBounds(380, 50, 130, buttonRoomHeight);
+        
+        serch_box.setBounds(310, 50, 130, buttonRoomHeight);
         
         backButtonForFrameF.addActionListener(this);
         b1.addActionListener(this);
@@ -127,19 +130,20 @@ public class rooms extends Frame implements ActionListener {
             jf.setVisible(true);
         }else if (evt.getSource() == b6) {
         	System.out.print("gg");
-            if(tt.getText().equals("2 person")) {
+            if(serch_box.getSelectedItem().equals("2 person")) {
             	System.out.print("gg");
             	b1.setVisible(false);
             	b2.setVisible(true);
             	b3.setVisible(false);
             	b4.setVisible(true);
-            }else if (tt.getText().equals("all")) {
+            }else if (serch_box.getSelectedItem().equals("all")) {
             	b1.setVisible(true);
             	b2.setVisible(true);
             	b3.setVisible(true);
             	b4.setVisible(true);
             }
-            else if (tt.getText().equals("1 person")) {
+            
+            else if (serch_box.getSelectedItem().equals("1 person")) {
             	b1.setVisible(true);
             	b2.setVisible(false);
             	b3.setVisible(true);
