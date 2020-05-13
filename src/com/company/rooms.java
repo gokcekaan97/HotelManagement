@@ -13,33 +13,34 @@ public class rooms extends Frame implements ActionListener {
     manage_room r;
     static JFrame roomsJframe;
     JFrame ff;
+    JTextField tt = new JTextField("room search",16);
     JButton b1 = new JButton("1");
     JButton b2 = new JButton("2");
     JButton b3 = new JButton("3");
     JButton b4 = new JButton("4");
     JButton b5 = new JButton("check room");
-    JButton b6 = new JButton("add");
-    JButton b7 = new JButton("delete");
+    JButton b6 = new JButton("search");
     JButton backButtonForFrameF = new JButton("Back");
-
+    
 
     rooms() {
         roomsJframe = new JFrame();
         ff = new JFrame();
 
-        JTextField t = new JTextField("enter name", 16);
+        JTextField t = new JTextField("enter ", 16);
 
         ff.add(t);
-        ff.add(b7);
+       
         t.setVisible(true);
-        ff.add(b6);
+        
         roomsJframe.add(backButtonForFrameF);
         roomsJframe.add(b1);
         roomsJframe.add(b2);
         roomsJframe.add(b3);
         roomsJframe.add(b4);
         roomsJframe.add(b5);
-
+        roomsJframe.add(b6);
+        roomsJframe.add(tt);
         roomsJframe.setLayout(null);
 
         //setting flow layout of right alignment
@@ -54,9 +55,9 @@ public class rooms extends Frame implements ActionListener {
         b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
         b5.setBounds(310, 75, 130, buttonRoomHeight);
-        t.setBounds(310, 100, 130, buttonRoomHeight);
-        b6.setBounds(310, 100, buttonRoomWidth, buttonRoomHeight);
-        b7.setBounds(210, 100, buttonRoomWidth, buttonRoomHeight);
+        b6.setBounds(380, 75, 130, buttonRoomHeight);
+        tt.setBounds(310, 100, 130, buttonRoomHeight);
+        
         backButtonForFrameF.addActionListener(this);
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -64,7 +65,7 @@ public class rooms extends Frame implements ActionListener {
         b4.addActionListener(this);
         b5.addActionListener(this);
         b6.addActionListener(this);
-        b7.addActionListener(this);
+      
 
         //for macs
        /* b1.setOpaque(true);
@@ -121,13 +122,30 @@ public class rooms extends Frame implements ActionListener {
             } else {
                 b4.setForeground(Color.green);
             }
-        } else if (evt.getSource() == b6) {
-            //do something
-        } else if (evt.getSource() == b7) {
-            //do something
-        } else if (evt.getSource() == backButtonForFrameF) {
+        }  else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
             jf.setVisible(true);
+        }else if (evt.getSource() == b6) {
+        	System.out.print("gg");
+            if(tt.getText().equals("2 person")) {
+            	System.out.print("gg");
+            	b1.setVisible(false);
+            	b2.setVisible(true);
+            	b3.setVisible(false);
+            	b4.setVisible(true);
+            }else if (tt.getText().equals("all")) {
+            	b1.setVisible(true);
+            	b2.setVisible(true);
+            	b3.setVisible(true);
+            	b4.setVisible(true);
+            }
+            else if (tt.getText().equals("1 person")) {
+            	b1.setVisible(true);
+            	b2.setVisible(false);
+            	b3.setVisible(true);
+            	b4.setVisible(false);
+            }
         }
+        
     }
 }
