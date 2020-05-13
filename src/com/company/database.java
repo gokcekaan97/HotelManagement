@@ -318,6 +318,28 @@ public class database {
         }
         return name;
     }
+    String enter_date;
+    String checkout_date;
+    public String getDate(int id) {
+        String query = "SELECT * FROM reservation where room='" + id + "'";
+        try (Connection conn = this.connect();
+        ) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                enter_date = rs.getString("enter_date");
+                checkout_date = rs.getString("chekout_date");
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if(enter_date!=null) {
+        return "room is full between"+ " "+enter_date +"--"+ checkout_date;
+        }else {
+        	return "room empty";
+        }
+    }
 }
 
 

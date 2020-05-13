@@ -20,7 +20,7 @@ public class manage_room extends Frame implements ActionListener {
     JButton b7 = new JButton("delete");
     JButton backButtonForFrameFF = new JButton("Back");
     JTextField t = new JTextField("enter name",16);
-
+    JLabel date_display=new JLabel();
     manage_room(int x) {
         this.x = x;
         ff = new JFrame();
@@ -29,10 +29,12 @@ public class manage_room extends Frame implements ActionListener {
         ff.add(t);
         ff.add(b7);
         t.setText(d.get(x));
+        System.out.print(d.getDate(x));
         t.setVisible(true);
         ff.add(b6);
         ff.add(backButtonForFrameFF);
-
+        ff.add(date_display);
+        date_display.setText(d.getDate(x));
         ff.setLayout(null);
         //setting flow layout of right alignment
 
@@ -61,7 +63,7 @@ public class manage_room extends Frame implements ActionListener {
         patternList1.setBounds(150, 110, 140, buttonRoomHeight);
         b6.setBounds(320, 75, buttonRoomWidth, buttonRoomHeight);
         b7.setBounds(390, 75, buttonRoomWidth, buttonRoomHeight);
-
+        date_display.setBounds(200, 110, 300, 200);
     }
 
     public void actionPerformed(ActionEvent evt) {
