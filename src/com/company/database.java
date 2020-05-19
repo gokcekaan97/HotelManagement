@@ -22,6 +22,7 @@ public class database {
 	JDialog dialogbox;
 	JLabel label;
 	String[] columnNames = {"Name", "Surname", "Age", "Gender","Salary","Number of Off Days"};
+	String[] roomColumnNames = {"name","room", "enterDate","checkoutDate"};
 	static JTable tb;
 	Staff s;
     private Connection connect() {
@@ -246,6 +247,66 @@ public class database {
     	salary=rs.getDouble("salary");
     	num_of_off_days=rs.getInt("offdays");
     	model.addRow(new Object[]{name,surname, age,gender,salary,num_of_off_days});
+    	i++;
+    	}
+    	if(i <1)
+    	{
+    	JOptionPane.showMessageDialog(null, "No Record Found","Error",
+    	JOptionPane.ERROR_MESSAGE);
+    	}
+    	if(i ==1)
+    	{
+    	System.out.println(i+" Record Found");
+    	}
+    	else
+    	{
+    	System.out.println(i+" Records Found");
+    	}
+    	}
+    	catch(Exception ex)
+    	{
+    	JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",
+    	JOptionPane.ERROR_MESSAGE);
+    	}
+    	frame.add(scroll);
+    	frame.setVisible(true);
+    	frame.setSize(frameWidth,frameHeight);
+    }
+    public void retrieveRoomTableData() {
+    	frame = new JFrame("Room Info");
+    	frame.setLayout(new BorderLayout());
+    	DefaultTableModel model = new DefaultTableModel();
+    	model.setColumnIdentifiers(roomColumnNames);
+    	tb = new JTable();
+    	tb.setModel(model);
+    	tb.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    	tb.setFillsViewportHeight(true);
+    	JScrollPane scroll = new JScrollPane(tb);
+    	scroll.setHorizontalScrollBarPolicy(
+    	JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    	scroll.setVerticalScrollBarPolicy(
+    	JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    	String name= "";
+    	
+    	int room;
+    	String enterDate = "";
+    	String checkoutDate= "";
+    	
+    	
+    	try {
+    	Connection con = this.connect();
+    	String sql = "select * from reservation";
+    	PreparedStatement ps = con.prepareStatement(sql);
+    	ResultSet rs = ps.executeQuery();
+    	int i =0;
+    	while(rs.next())
+    	{
+    	name = rs.getString("name");
+    	room= rs.getInt("room");
+    	
+    	enterDate = rs.getString("enter_date");
+    	checkoutDate = rs.getString("chekout_date");
+    	model.addRow(new Object[]{name,room, enterDate,checkoutDate});
     	i++;
     	}
     	if(i <1)

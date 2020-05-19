@@ -29,6 +29,7 @@ public class Staff extends Frame implements ActionListener {
     JButton button3;
     JButton button4;
     JButton button5;
+    
     JButton backButtonForFrame1;
     JButton backButtonForFrame2;
 	JButton backButtonForFrame3;
@@ -88,6 +89,7 @@ public class Staff extends Frame implements ActionListener {
         button4.setBounds(130, 200, buttonWidth, buttonHeight);
         button5 = new JButton("View Table");
         button5.setBounds(130, 130, buttonWidth, buttonHeight);
+        
 
         frame1.add(backButtonForFrame1);
         frame1.add(button1);

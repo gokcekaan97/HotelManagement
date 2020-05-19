@@ -12,23 +12,28 @@ public class MainMenu extends Frame implements ActionListener {
 	Staff s;
 	database d=new database();
 	JButton b1=new JButton("Room Management");
+	JButton b4=new JButton("Room List");
 	JButton b2=new JButton("Staff Management");
 	JButton b3=new JButton("Logout");
+	
 
 	MainMenu(){
 		jf=new JFrame("Hotel Management System");
 		b1.setBounds(120,40,buttonWidth, buttonHeight);
 		b2.setBounds(120,120,buttonWidth, buttonHeight);
 		b3.setBounds(120,200, buttonWidth, buttonHeight);
+		b4.setBounds(120,280, buttonWidth, buttonHeight);
 		jf.add(b1);
 		jf.add(b2);
 		jf.add(b3);
-		jf.setSize(frameWidth, frameHeight);
+		jf.add(b4);
+		jf.setSize(frameWidth, 400);//increased height room list not show
 		jf.setLayout(null);
 		jf.setVisible(true);
 		b1.addActionListener(this);
 		b2.addActionListener(this);
 		b3.addActionListener(this);
+		b4.addActionListener(this);
 		}
 	//Actions performed when pressed room management, staff management and logout
 	public void actionPerformed(ActionEvent evt) {
@@ -43,6 +48,9 @@ public class MainMenu extends Frame implements ActionListener {
 		if(evt.getSource()==b3) {
 			jf.setVisible(false);
 			new StartingScreen();
+		}
+		if(evt.getSource()==b4) {
+			d.retrieveRoomTableData();;
 		}
 	}
 }
