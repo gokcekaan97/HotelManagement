@@ -417,6 +417,23 @@ public class database {
         	return "room empty";
         }
     }
+    public String CheckDate(int id,String enter,String checkout) {
+        String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date >= '"+ enter +"' AND\n" +
+                "        chekout_date   <= '"+checkout+"'";
+        try (Connection conn = this.connect();
+        ) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                return "room is full";
+            }else{
+                return "room is empty";
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return "error";
+    }
 }
 
 

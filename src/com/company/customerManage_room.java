@@ -69,7 +69,7 @@ public class customerManage_room extends Frame implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b6) {
-        	if(d.get(x)!=null) {
+        	if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
         		
         		JOptionPane.showMessageDialog(dialogframe, "Room is full");
         	}else {
