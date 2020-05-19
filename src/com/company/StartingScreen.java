@@ -67,8 +67,7 @@ public class StartingScreen extends Frame implements ActionListener{
             if (tp.getSelectedIndex()==0) {
                 if (d.loginCheck(username.getText(),password.getText())) {
                     frame.setVisible(false);
-                   
-                    
+                                       
                     new customerRooms();
                     //new customer screen will be called here.
                     JOptionPane.showMessageDialog(dialogframe, "Successfully logged in");

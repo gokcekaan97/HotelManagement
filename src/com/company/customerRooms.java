@@ -9,7 +9,7 @@ import static com.company.MainMenu.jf;
 import static com.company.StartingScreen.frame;
 //Room allocating -rooms are demonstrated and colors represent the occupancy status of the rooms.
 public class customerRooms extends Frame implements ActionListener {
-	StartingScreen scc =new StartingScreen();
+	StartingScreen scc ;
     database d = new database();
     customerManage_room r;
     static JFrame roomsJframe;
