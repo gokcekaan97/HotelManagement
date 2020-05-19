@@ -3,6 +3,9 @@ package com.company;
 
 import java.awt.BorderLayout;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -434,6 +437,29 @@ public class database {
         }
         return "error";
     }
+    public List<Integer> CheckDatee(int id,String enter,String checkout) {
+    	List<Integer> a = new ArrayList<>();
+    	while(id<5) {
+        String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date >= '"+ enter +"' AND\n" +
+                "        chekout_date   <= '"+checkout+"'";
+        try (Connection conn = this.connect();
+        ) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                a.add(id);
+            }else{
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+       
+        id++;
+    }
+    	System.out.print("asd"+a);
+		return a;
+}
 }
 
 

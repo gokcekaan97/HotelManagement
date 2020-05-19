@@ -128,6 +128,7 @@ public class rooms extends Frame implements ActionListener {
         }  else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
             jf.setVisible(true);
+            
         }else if (evt.getSource() == b6) {
         	System.out.print("gg");
             if(serch_box.getSelectedItem().equals("2 person")) {

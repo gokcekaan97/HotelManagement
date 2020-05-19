@@ -2,6 +2,9 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.*;
 
 import static com.company.Constants.*;
@@ -9,6 +12,8 @@ import static com.company.MainMenu.jf;
 import static com.company.StartingScreen.frame;
 //Room allocating -rooms are demonstrated and colors represent the occupancy status of the rooms.
 public class customerRooms extends Frame implements ActionListener {
+	JComboBox patternList;
+    JComboBox patternList1;
 	StartingScreen scc ;
     database d = new database();
     customerManage_room r;
@@ -25,6 +30,13 @@ public class customerRooms extends Frame implements ActionListener {
     JComboBox serch_box ;
     String s1[] = { "all", "1 person", "2 person" };
     customerRooms() {
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        String[] patternExamples = {
+                dtf.format(now)
+        };
+        patternList1 = new JComboBox(patternExamples);
+        patternList = new JComboBox(patternExamples);
         roomsJframe = new JFrame();
         ff = new JFrame();
 
@@ -41,12 +53,12 @@ public class customerRooms extends Frame implements ActionListener {
         roomsJframe.add(b4);
         roomsJframe.add(b5);
         roomsJframe.add(b6);
-        
-        
+        roomsJframe.add(patternList);
+        roomsJframe.add(patternList1);
         roomsJframe.setLayout(null);
         serch_box= new JComboBox(s1);
         //setting flow layout of right alignment
-        roomsJframe.add(serch_box);
+        
 
         roomsJframe.setSize(frameWidth, frameHeight);
         ff.setSize(frameWidth, frameHeight);
@@ -58,10 +70,10 @@ public class customerRooms extends Frame implements ActionListener {
         b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
         b5.setBounds(310, 75, 130, buttonRoomHeight);
-        b6.setBounds(380, 50, 130, buttonRoomHeight);
+        b6.setBounds(310, 50, 130, buttonRoomHeight);
         
-        serch_box.setBounds(310, 50, 130, buttonRoomHeight);
-        
+        patternList.setBounds(310, 10, 130, buttonRoomHeight);
+        patternList1.setBounds(310, 30, 130, buttonRoomHeight);
         backButtonForFrameF.addActionListener(this);
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -133,24 +145,22 @@ public class customerRooms extends Frame implements ActionListener {
             
         }else if (evt.getSource() == b6) {
         	System.out.print("gg");
-            if(serch_box.getSelectedItem().equals("2 person")) {
+            if(d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(1)) {
             	System.out.print("gg");
             	b1.setVisible(false);
-            	b2.setVisible(true);
-            	b3.setVisible(false);
-            	b4.setVisible(true);
-            }else if (serch_box.getSelectedItem().equals("all")) {
-            	b1.setVisible(true);
-            	b2.setVisible(true);
-            	b3.setVisible(true);
-            	b4.setVisible(true);
+            	
+            } if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(2))) {
+            	b2.setVisible(false);
+            	
             }
             
-            else if (serch_box.getSelectedItem().equals("1 person")) {
-            	b1.setVisible(true);
-            	b2.setVisible(false);
-            	b3.setVisible(true);
+             if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(3))) {
+            	b3.setVisible(false);
+            	
+            }
+             if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(4))) {
             	b4.setVisible(false);
+            	
             }
         }
         
