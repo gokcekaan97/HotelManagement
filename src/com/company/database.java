@@ -137,9 +137,9 @@ public class database {
             }
             return flag;
         }
-        public boolean CheckEmployeePassword(String password) {
+        public boolean loginCheck(String username, String password) {
             boolean flag = false;
-            String query="SELECT * FROM employee WHERE password ='"+password+"'";
+            String query="SELECT * FROM users WHERE username ='"+username+"'AND password='"+password+"'";
             try (Connection conn = this.connect()) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
@@ -153,7 +153,23 @@ public class database {
             }
             return flag;
         }
-  	
+        public boolean adminLoginCheck(String username, String password) {
+            boolean flag = false;
+            String query="SELECT * FROM users WHERE username ='"+username+"'AND password='"+password+"' AND admin=1";
+            try (Connection conn = this.connect()) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    flag = true;
+                }
+            }
+
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return flag;
+        }
+        
     	
 
     public void insert(int id, String name, int point, String enter, String checkout) {

@@ -22,6 +22,7 @@ public class StartingScreen extends Frame implements ActionListener{
     public JLabel usertypelabel;
     public Icon icon;
     private database d=new database();
+    
     public StartingScreen(){
     	JFrame.setDefaultLookAndFeelDecorated(true);
         frame = new JFrame("StartingScreen");
@@ -59,13 +60,16 @@ public class StartingScreen extends Frame implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    //
+    
+ 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == loginbutton) {
             if (tp.getSelectedIndex()==0) {
-                if (d.CheckCustomerUserName(username.getText())
-                        && d.CheckCustomerPassword(password.getText())) {
+                if (d.loginCheck(username.getText(),password.getText())) {
                     frame.setVisible(false);
+                   
+                    
+                    new customerRooms();
                     //new customer screen will be called here.
                     JOptionPane.showMessageDialog(dialogframe, "Successfully logged in");
                 } else {
@@ -73,8 +77,7 @@ public class StartingScreen extends Frame implements ActionListener{
                 }
             }
             if (tp.getSelectedIndex()==1){
-                if (d.CheckEmployeeUserName(username.getText())
-                        && d.CheckEmployeePassword(password.getText())){
+                if ( d.adminLoginCheck(username.getText(), password.getText())){
                     frame.setVisible(false);
                     new MainMenu();
                     JOptionPane.showMessageDialog(dialogframe, "Successfully logged in.");
