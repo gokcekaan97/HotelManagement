@@ -428,7 +428,8 @@ public class database {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
-                return "room is full";
+                if(id==rs.getInt("room"))
+                    return "room is full";
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
