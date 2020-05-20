@@ -3,18 +3,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import com.company.database;
 
-import javax.swing.*;
-import java.time.format.DateTimeFormatter;
 
 public class testCheckDates {
-
-   /* getDate
-
-    CheckDate
-
-    price
-*/
-
     database d = new database();
     @Test
     public void testCheckDates_Positive() {
@@ -30,6 +20,4 @@ public class testCheckDates {
         assertNotEquals("room is full",  d.CheckDate(3, "2020/03/12", "2020/03/19"));
         assertNotEquals("room is full",  d.CheckDate(2, "2020/01/02", "2020/01/25"));
     }
-
-
 }

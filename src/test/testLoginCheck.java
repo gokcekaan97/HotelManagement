@@ -5,14 +5,14 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
-public class testAdminCheck {
+public class testLoginCheck {
     database d = new database();
     @Test
     public void testAdminCheck_Positive() {
-          assertTrue(d.adminLoginCheck("ihsan", "123456"));
+        assertTrue(d.loginCheck("ihs", "1"));
     }
     @Test
     public void testAdminCheck_Negative() {
-          assertFalse(d.adminLoginCheck("ihs", "123456"));
+        assertFalse(d.loginCheck("ihs", "123456"));
     }
 }

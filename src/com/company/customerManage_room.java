@@ -1,4 +1,5 @@
 package com.company;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.*;
+
 import static com.company.Constants.*;
 import static com.company.customerRooms.roomsJframe;
 
@@ -18,19 +20,18 @@ public class customerManage_room extends Frame implements ActionListener {
     public JFrame dialogframe;
     int x;
     JFrame ff;
-    JLabel date_display_text=new JLabel("Room Status:");
+    JLabel date_display_text = new JLabel("Room Status:");
     JButton b6 = new JButton("Complete");
     JButton backButtonForFrameFF = new JButton("Back");
-    JTextField t = new JTextField("Enter Name",16);
-    JLabel date_display=new JLabel();
+    JTextField t = new JTextField("Enter Name", 16);
+    JLabel date_display = new JLabel();
+
     customerManage_room(int x) {
         this.x = x;
         ff = new JFrame();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         ff.add(t);
-
-
         System.out.print(d.getDate(x));
         t.setVisible(true);
         ff.add(b6);
@@ -38,9 +39,9 @@ public class customerManage_room extends Frame implements ActionListener {
         ff.add(backButtonForFrameFF);
         ff.add(date_display);
         date_display.setText(d.getDate(x));
-        if(d.getDate(x).equals("Room is available")) {
+        if (d.getDate(x).equals("Room is available")) {
             date_display.setForeground(Color.GREEN);
-        } else{
+        } else {
             date_display.setForeground(Color.RED);
         }
         ff.setLayout(null);
@@ -75,36 +76,54 @@ public class customerManage_room extends Frame implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b6) {
-        	d.CheckDatee(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
-        	if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
+            try {
+                String a = (String) patternList.getSelectedItem();
+                String aa = (String) patternList1.getSelectedItem();
+                String format = "yyyy/MM/dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(format);
+                java.util.Date dateObj2 = sdf.parse(aa);
+                java.util.Date dateObj1 = sdf.parse(a);
+                long diff = dateObj2.getTime() - dateObj1.getTime();
+                int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+                if (diffDays < 0) {
+                    JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
+                } else {
+                    d.CheckDatee(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
+                    if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
 
-        		JOptionPane.showMessageDialog(dialogframe, "Room is full");
-        	}else {
+                        JOptionPane.showMessageDialog(dialogframe, "Room is full");
+                    }else {
 
-                try {
-                    int a = price();
-                    if(a == 0) {
-                        System.out.print(patternList.getSelectedItem());
-                        d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
-                        new customerRooms();
-                    }else{
-                        new customerManage_room(x);
+                        try {
+                            int z = price();
+                            if(z == 0) {
+                                System.out.print(patternList.getSelectedItem());
+                                d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
+                                new customerRooms();
+                            }else{
+                                new customerManage_room(x);
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        ff.setVisible(false);
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            ff.setVisible(false);
-        	}
         }   else if (evt.getSource() == backButtonForFrameFF) {
             ff.setVisible(false);
             roomsJframe.setVisible(true);
         }
     }
+
     public int price() throws ParseException {
 
-        String a=(String) patternList.getSelectedItem();
-        String aa=(String) patternList1.getSelectedItem();
+        String a = (String) patternList.getSelectedItem();
+        String aa = (String) patternList1.getSelectedItem();
         String format = "yyyy/MM/dd";
         int totalPrice;
         SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -112,20 +131,20 @@ public class customerManage_room extends Frame implements ActionListener {
         java.util.Date dateObj1 = sdf.parse(a);
         long diff = dateObj2.getTime() - dateObj1.getTime();
         int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-        if(diffDays <0){
+        if (diffDays < 0) {
             JOptionPane.showMessageDialog(dialogframe, "days must be chosen correctly");
             return 1;
-        } else if( diffDays==0){
-            diffDays=1;
+        } else if (diffDays == 0) {
+            diffDays = 1;
             System.out.println("difference between days: " + diffDays);
-            totalPrice=diffDays*100;
-            JOptionPane.showMessageDialog(dialogframe, "total price: " +totalPrice );
+            totalPrice = diffDays * 100;
+            JOptionPane.showMessageDialog(dialogframe, "total price: " + totalPrice);
             return 0;
-        }else {
-            diffDays+=1;
+        } else {
+            diffDays += 1;
             System.out.println("difference between days: " + diffDays);
-            totalPrice=diffDays*100;
-            JOptionPane.showMessageDialog(dialogframe, "total price: " +totalPrice );
+            totalPrice = diffDays * 100;
+            JOptionPane.showMessageDialog(dialogframe, "total price: " + totalPrice);
             return 0;
         }
     }
