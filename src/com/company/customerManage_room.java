@@ -2,6 +2,8 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.*;
@@ -48,7 +50,6 @@ public class customerManage_room extends Frame implements ActionListener {
         String[] patternExamples = {
                 dtf.format(now)
         };
-
         patternList = new JComboBox(patternExamples);
         patternList.setEditable(true);
         patternList.addActionListener(this);
@@ -74,14 +75,53 @@ public class customerManage_room extends Frame implements ActionListener {
         		
         		JOptionPane.showMessageDialog(dialogframe, "Room is full");
         	}else {
-            System.out.print(patternList.getSelectedItem());
-            d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
-            new customerRooms();
+
+                try {
+                    int a = price();
+                    if(a == 0) {
+                        System.out.print(patternList.getSelectedItem());
+                        d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
+                        new customerRooms();
+                    }else{
+                        new customerManage_room(x);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             ff.setVisible(false);
         	}
         }   else if (evt.getSource() == backButtonForFrameFF) {
             ff.setVisible(false);
             roomsJframe.setVisible(true);
+        }
+    }
+    public int price() throws ParseException {
+
+        String a=(String) patternList.getSelectedItem();
+        String aa=(String) patternList1.getSelectedItem();
+        String format = "yyyy/MM/dd";
+        int totalPrice;
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        java.util.Date dateObj2 = sdf.parse(aa);
+        java.util.Date dateObj1 = sdf.parse(a);
+        long diff = dateObj2.getTime() - dateObj1.getTime();
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+        if(diffDays <0){
+            JOptionPane.showMessageDialog(dialogframe, "days must be chosen correctly");
+            return 1;
+        } else if( diffDays==0){
+            diffDays=1;
+            System.out.println("difference between days: " + diffDays);
+            totalPrice=diffDays*100;
+            JOptionPane.showMessageDialog(dialogframe, "total price: " +totalPrice );
+            return 0;
+        }else {
+            diffDays+=1;
+            System.out.println("difference between days: " + diffDays);
+            totalPrice=diffDays*100;
+            JOptionPane.showMessageDialog(dialogframe, "total price: " +totalPrice );
+            return 0;
         }
     }
 

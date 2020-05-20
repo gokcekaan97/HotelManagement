@@ -2,8 +2,12 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -19,12 +23,12 @@ public class customerRooms extends Frame implements ActionListener {
     customerManage_room r;
     static JFrame roomsJframe;
     JFrame ff;
+    public JFrame dialogframe;
     JTextField tt = new JTextField("room search",16);
     JButton b1 = new JButton("1");
     JButton b2 = new JButton("2");
     JButton b3 = new JButton("3");
     JButton b4 = new JButton("4");
-    JButton b5 = new JButton("check room");
     JButton b6 = new JButton("search");
     JButton backButtonForFrameF = new JButton("Back");
     JComboBox serch_box ;
@@ -38,6 +42,8 @@ public class customerRooms extends Frame implements ActionListener {
         patternList1 = new JComboBox(patternExamples);
         patternList = new JComboBox(patternExamples);
         roomsJframe = new JFrame();
+        patternList1.setEditable(true);
+        patternList.setEditable(true);
         ff = new JFrame();
 
         JTextField t = new JTextField("enter ", 16);
@@ -51,7 +57,7 @@ public class customerRooms extends Frame implements ActionListener {
         roomsJframe.add(b2);
         roomsJframe.add(b3);
         roomsJframe.add(b4);
-        roomsJframe.add(b5);
+
         roomsJframe.add(b6);
         roomsJframe.add(patternList);
         roomsJframe.add(patternList1);
@@ -69,7 +75,6 @@ public class customerRooms extends Frame implements ActionListener {
         b2.setBounds(100, 75, buttonRoomWidth, buttonRoomHeight);
         b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
-        b5.setBounds(310, 75, 130, buttonRoomHeight);
         b6.setBounds(310, 50, 130, buttonRoomHeight);
         
         patternList.setBounds(310, 10, 130, buttonRoomHeight);
@@ -79,7 +84,6 @@ public class customerRooms extends Frame implements ActionListener {
         b2.addActionListener(this);
         b3.addActionListener(this);
         b4.addActionListener(this);
-        b5.addActionListener(this);
         b6.addActionListener(this);
       
 
@@ -116,52 +120,53 @@ public class customerRooms extends Frame implements ActionListener {
         } else if (evt.getSource() == b4) {
             r = new customerManage_room(4);
             roomsJframe.setVisible(false);
-        } else if (evt.getSource() == b5) {
-            if (d.getPoint(1) == 1) {
-                b1.setForeground(Color.red);
-            } else {
-                b1.setForeground(Color.green);
-            }
-            if (d.getPoint(2) == 2) {
-                b2.setForeground(Color.red);
-            } else {
-                b2.setForeground(Color.green);
-            }
-            if (d.getPoint(3) == 3) {
-
-                b3.setForeground(Color.red);
-            } else {
-                b3.setForeground(Color.green);
-            }
-            if (d.getPoint(4) == 4) {
-                b4.setForeground(Color.red);
-            } else {
-                b4.setForeground(Color.green);
-            }
-        }  else if (evt.getSource() == backButtonForFrameF) {
+        }   else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
           
             	frame.setVisible(true);
             
         }else if (evt.getSource() == b6) {
+            List<Integer> myList;
         	System.out.print("gg");
-            if(d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(1)) {
-            	System.out.print("gg");
-            	b1.setVisible(false);
-            	
-            } if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(2))) {
-            	b2.setVisible(false);
-            	
+        	b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            try{
+                String a=(String) patternList.getSelectedItem();
+                String aa=(String) patternList1.getSelectedItem();
+                String format = "yyyy/MM/dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(format);
+                java.util.Date dateObj2 = sdf.parse(aa);
+                java.util.Date dateObj1 = sdf.parse(a);
+                long diff = dateObj2.getTime() - dateObj1.getTime();
+                int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+                if(diffDays <0){
+                    JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
+                } else {
+                    myList= d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
+                    if(myList.contains(1)) {
+                        System.out.print("gg");
+                        b1.setVisible(false);
+
+                    } if (myList.contains(2)) {
+                        b2.setVisible(false);
+
+                    }
+
+                    if (myList.contains(3)) {
+                        b3.setVisible(false);
+
+                    }
+                    if (myList.contains(4)) {
+                        b4.setVisible(false);
+
+                    }
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-            
-             if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(3))) {
-            	b3.setVisible(false);
-            	
-            }
-             if ((d.CheckDatee(1,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()).contains(4))) {
-            	b4.setVisible(false);
-            	
-            }
+
         }
         
     }

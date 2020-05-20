@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import static com.company.Constants.*;
+import static com.company.MainMenu.jf;
 import static com.company.StartingScreen.*;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -29,12 +30,13 @@ public class RegisterScreen extends Frame implements ActionListener {
 	public JRadioButton gender_female;
 	public JTextField address;
 	public JButton registerbutton;
+	public JButton backButtonForFrame1;
 	public database d=new database();
 	public StartingScreen sc;
 	
 	public RegisterScreen() {
 		registerframe=new JFrame("Register");
-		registerframe.setSize(frameWidth,500);
+		registerframe.setSize(frameWidth,550);
 		usernamelabel=new JLabel("Username");
 		usernamelabel.setBounds(20,40,200,30);
 		passwordlabel=new JLabel("Password");
@@ -71,6 +73,8 @@ public class RegisterScreen extends Frame implements ActionListener {
 		address.setBounds(130,320,textWidth,textHeight);
 		registerbutton=new JButton("Register");
 		registerbutton.setBounds(130,360,buttonWidth,buttonHeight);
+		backButtonForFrame1 = new JButton("Back");
+		backButtonForFrame1.setBounds(130,420,buttonWidth,buttonHeight);
 		registerframe.add(usernamelabel);
 		registerframe.add(passwordlabel);
 		registerframe.add(namelabel);
@@ -88,9 +92,11 @@ public class RegisterScreen extends Frame implements ActionListener {
 		registerframe.add(address);
 		registerframe.add(registerbutton);
 		registerframe.add(usertypelabel);
+		registerframe.add(backButtonForFrame1);
 		registerframe.setLayout(null);
 		registerframe.setVisible(true);
 		registerbutton.addActionListener(this);
+		backButtonForFrame1.addActionListener(this);
 		}
 	//Actions performed when pressed register button.
 	public void actionPerformed(ActionEvent e) {
@@ -114,7 +120,10 @@ public class RegisterScreen extends Frame implements ActionListener {
 						  "4) Password must contain at least 1 lower case letter\r\n" + 
 						  "5) Password must contain at least 1 special character\r\n" + 
 						  "6) Password must not contain any spaces");
-	}
+	} else if (e.getSource() == backButtonForFrame1) {
+			registerframe.setVisible(false);
+			frame.setVisible(true);
+		}
 	}
 	//ID generation for users
 	public static int generateID() {

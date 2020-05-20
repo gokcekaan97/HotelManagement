@@ -421,16 +421,14 @@ public class database {
         }
     }
     public String CheckDate(int id,String enter,String checkout) {
-        String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date >= '"+ enter +"' AND\n" +
-                "        chekout_date   <= '"+checkout+"'";
+        String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date <= '"+ enter +"' AND " +
+                "chekout_date   >= '"+checkout+"' OR enter_date BETWEEN '"+enter+"' AND '"+checkout+"' OR chekout_date BETWEEN '"+enter+"' AND '"+checkout+"'";
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if(rs.next()){
+            while(rs.next()){
                 return "room is full";
-            }else{
-                return "room is empty";
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -438,18 +436,18 @@ public class database {
         return "error";
     }
     public List<Integer> CheckDatee(int id,String enter,String checkout) {
-    	List<Integer> a = new ArrayList<>();
+    	ArrayList<Integer> a = new ArrayList<>();
     	while(id<5) {
-        String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date >= '"+ enter +"' AND\n" +
-                "        chekout_date   <= '"+checkout+"'";
+        String query = "SELECT * FROM reservation WHERE  enter_date <= '"+ enter +"' AND " +
+                "chekout_date   >= '"+checkout+"' OR enter_date BETWEEN '"+enter+"' AND '"+checkout+"' OR chekout_date BETWEEN '"+enter+"' AND '"+checkout+"'";
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if(rs.next()){
-                a.add(id);
-            }else{
-                
+            while(rs.next()){
+                System.out.println("asd"+id);
+                if(id==rs.getInt("room"))
+                    a.add(id);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
