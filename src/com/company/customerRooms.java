@@ -24,12 +24,13 @@ public class customerRooms extends Frame implements ActionListener {
     static JFrame roomsJframe;
     JFrame ff;
     public JFrame dialogframe;
+    JLabel roomsListedText = new JLabel("Rooms are listed below:");
     JTextField tt = new JTextField("room search",16);
     JButton b1 = new JButton("1");
     JButton b2 = new JButton("2");
     JButton b3 = new JButton("3");
     JButton b4 = new JButton("4");
-    JButton b6 = new JButton("search");
+    JButton b6 = new JButton("Search Room");
     JButton backButtonForFrameF = new JButton("Back");
     JComboBox serch_box ;
     String s1[] = { "all", "1 person", "2 person" };
@@ -41,7 +42,7 @@ public class customerRooms extends Frame implements ActionListener {
         };
         patternList1 = new JComboBox(patternExamples);
         patternList = new JComboBox(patternExamples);
-        roomsJframe = new JFrame();
+        roomsJframe = new JFrame("Reservation Screen");
         patternList1.setEditable(true);
         patternList.setEditable(true);
         ff = new JFrame();
@@ -49,9 +50,10 @@ public class customerRooms extends Frame implements ActionListener {
         JTextField t = new JTextField("enter ", 16);
 
         ff.add(t);
-       
+
         t.setVisible(true);
-        
+
+        roomsJframe.add(roomsListedText);
         roomsJframe.add(backButtonForFrameF);
         roomsJframe.add(b1);
         roomsJframe.add(b2);
@@ -64,19 +66,20 @@ public class customerRooms extends Frame implements ActionListener {
         roomsJframe.setLayout(null);
         serch_box= new JComboBox(s1);
         //setting flow layout of right alignment
-        
+
 
         roomsJframe.setSize(frameWidth, frameHeight);
         ff.setSize(frameWidth, frameHeight);
         ff.setVisible(false);
         roomsJframe.setVisible(true);
         backButtonForFrameF.setBounds(30, 30, buttonRoomWidth, buttonRoomHeight);
-        b1.setBounds(30, 75, buttonRoomWidth, buttonRoomHeight);
-        b2.setBounds(100, 75, buttonRoomWidth, buttonRoomHeight);
-        b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
-        b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
-        b6.setBounds(310, 50, 130, buttonRoomHeight);
-        
+        roomsListedText.setBounds(30, 75, 200, buttonHeight);
+        b1.setBounds(30, 120, buttonRoomWidth, buttonRoomHeight);
+        b2.setBounds(100, 120, buttonRoomWidth, buttonRoomHeight);
+        b3.setBounds(170, 120, buttonRoomWidth, buttonRoomHeight);
+        b4.setBounds(240, 120, buttonRoomWidth, buttonRoomHeight);
+        b6.setBounds(310, 120, 145, buttonRoomHeight);
+
         patternList.setBounds(310, 10, 130, buttonRoomHeight);
         patternList1.setBounds(310, 30, 130, buttonRoomHeight);
         backButtonForFrameF.addActionListener(this);
@@ -85,7 +88,7 @@ public class customerRooms extends Frame implements ActionListener {
         b3.addActionListener(this);
         b4.addActionListener(this);
         b6.addActionListener(this);
-      
+
 
         //for macs
        /* b1.setOpaque(true);
@@ -122,9 +125,9 @@ public class customerRooms extends Frame implements ActionListener {
             roomsJframe.setVisible(false);
         }   else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
-          
+
             	frame.setVisible(true);
-            
+
         }else if (evt.getSource() == b6) {
             List<Integer> myList;
         	System.out.print("gg");
@@ -168,6 +171,6 @@ public class customerRooms extends Frame implements ActionListener {
             }
 
         }
-        
+
     }
 }

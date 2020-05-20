@@ -18,11 +18,10 @@ public class customerManage_room extends Frame implements ActionListener {
     public JFrame dialogframe;
     int x;
     JFrame ff;
-
-    JButton b6 = new JButton("add");
-    
+    JLabel date_display_text=new JLabel("Room Status:");
+    JButton b6 = new JButton("Complete");
     JButton backButtonForFrameFF = new JButton("Back");
-    JTextField t = new JTextField("enter name",16);
+    JTextField t = new JTextField("Enter Name",16);
     JLabel date_display=new JLabel();
     customerManage_room(int x) {
         this.x = x;
@@ -30,14 +29,20 @@ public class customerManage_room extends Frame implements ActionListener {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         ff.add(t);
-        
-        
+
+
         System.out.print(d.getDate(x));
         t.setVisible(true);
         ff.add(b6);
+        ff.add(date_display_text);
         ff.add(backButtonForFrameFF);
         ff.add(date_display);
         date_display.setText(d.getDate(x));
+        if(d.getDate(x).equals("Room is available")) {
+            date_display.setForeground(Color.GREEN);
+        } else{
+            date_display.setForeground(Color.RED);
+        }
         ff.setLayout(null);
         //setting flow layout of right alignment
 
@@ -46,7 +51,7 @@ public class customerManage_room extends Frame implements ActionListener {
 
         backButtonForFrameFF.addActionListener(this);
         b6.addActionListener(this);
-        
+
         String[] patternExamples = {
                 dtf.format(now)
         };
@@ -63,16 +68,16 @@ public class customerManage_room extends Frame implements ActionListener {
         t.setBounds(30, 75, 110, buttonRoomHeight);
         patternList.setBounds(150, 75, 140, buttonRoomHeight);
         patternList1.setBounds(150, 110, 140, buttonRoomHeight);
-        b6.setBounds(320, 75, buttonRoomWidth, buttonRoomHeight);
-        
-        date_display.setBounds(200, 110, 300, 200);
+        b6.setBounds(320, 75, 145, buttonRoomHeight);
+        date_display_text.setBounds(130, 95, 350, 200);
+        date_display.setBounds(130, 110, 350, 200);
     }
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == b6) {
         	d.CheckDatee(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
         	if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
-        		
+
         		JOptionPane.showMessageDialog(dialogframe, "Room is full");
         	}else {
 
