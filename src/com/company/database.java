@@ -41,7 +41,7 @@ public class database {
     public void registerCustomer(int id,String username,String password,String name,String surname,int age,String gender,String address) {
     	String sql="INSERT INTO users(id,username,password,name,surname,age,gender,address)"
     			+ "VALUES(?,?,?,?,?,?,?,?)";
-    	
+
     	 try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)
             )
@@ -67,7 +67,7 @@ public class database {
     public void registerEmployee(int id,String username,String password,String name,String surname,int age,String gender,String address) {
         String sql="INSERT INTO employee(id,username,password,name,surname,age,gender,address)"
     			+ "VALUES(?,?,?,?,?,?,?,?)";
-    	
+
         try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)
             )
@@ -90,7 +90,7 @@ public class database {
                 System.out.println(e.getMessage());
         }
     }
-    
+
     	public boolean CheckCustomerUserName(String username) {
             boolean flag = false;
     		String query="SELECT * FROM users WHERE username ='"+username+"'";
@@ -123,7 +123,7 @@ public class database {
             }
             return flag;
         }
-    	
+
     	public boolean CheckCustomerPassword(String password) {
             boolean flag = false;
     		String query="SELECT * FROM users WHERE password ='"+password+"'";
@@ -172,8 +172,8 @@ public class database {
             }
             return flag;
         }
-        
-    	
+
+
 
     public void insert(int id, String name, int point, String enter, String checkout) {
         String sql = "INSERT INTO reservation(id,name,room,enter_date,chekout_date) VALUES(?,?,?,?,?)";
@@ -306,12 +306,12 @@ public class database {
     	scroll.setVerticalScrollBarPolicy(
     	JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     	String name= "";
-    	
+
     	int room;
     	String enterDate = "";
     	String checkoutDate= "";
-    	
-    	
+
+
     	try {
     	Connection con = this.connect();
     	String sql = "select * from reservation";
@@ -322,7 +322,7 @@ public class database {
     	{
     	name = rs.getString("name");
     	room= rs.getInt("room");
-    	
+
     	enterDate = rs.getString("enter_date");
     	checkoutDate = rs.getString("chekout_date");
     	model.addRow(new Object[]{name,room, enterDate,checkoutDate});
@@ -415,9 +415,9 @@ public class database {
             System.out.println(e.getMessage());
         }
         if(enter_date!=null) {
-        return "room is full between"+ " "+enter_date +"--"+ checkout_date;
+        return "Room is full between"+ " "+enter_date +"--"+ checkout_date;
         }else {
-        	return "room empty";
+        	return "Room is available";
         }
     }
     public String CheckDate(int id,String enter,String checkout) {
@@ -453,7 +453,7 @@ public class database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-       
+
         id++;
     }
     	System.out.print("asd"+a);
