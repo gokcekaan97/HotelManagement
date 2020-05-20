@@ -29,7 +29,7 @@ public class database {
 	static JTable tb;
 	Staff s;
     private Connection connect() {
-        String url = "jdbc:mysql://localhost:3306/users?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        String url = "jdbc:mysql://192.168.64.2:3306/hotel_mng?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, "root", "");
