@@ -70,18 +70,30 @@ public class manage_room extends Frame implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         try {
+        	
+        	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        	 LocalDateTime now = LocalDateTime.now();
             String a = (String) patternList.getSelectedItem();
             String aa = (String) patternList1.getSelectedItem();
+            String aaa =dtf.format(now);
             String format = "yyyy/MM/dd";
             SimpleDateFormat sdf = new SimpleDateFormat(format);
             java.util.Date dateObj2 = sdf.parse(aa);
             java.util.Date dateObj1 = sdf.parse(a);
+            java.util.Date dateObj3 = sdf.parse(aaa);
+            
+            
+            
+            
             long diff = dateObj2.getTime() - dateObj1.getTime();
+            long difff = dateObj1.getTime() - dateObj3.getTime();
             int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+            int diffDayss = (int) (difff / (24 * 60 * 60 * 1000));
             if (evt.getSource() == b6) {
-                if (diffDays < 0) {
+                if (diffDays < 0 || diffDayss < 0) {
                     JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
                 } else {
+                	System.out.print("asdadasd"+diffDayss);
                     if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
                         JOptionPane.showMessageDialog(dialogframe, "Room is full");
                     }else {
@@ -92,20 +104,10 @@ public class manage_room extends Frame implements ActionListener {
                     }
                 }
             } else if (evt.getSource() == b7) {
-                if (diffDays < 0) {
+                if (diffDays < 0 ) {
                     JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
-                } else {
-                    if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
-
-                        d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
-                        JOptionPane.showMessageDialog(dialogframe, "succecfully deleted");
-                        new rooms();
-                        ff.setVisible(false);
-                    }else if (d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="error"){
-                        JOptionPane.showMessageDialog(dialogframe, "can't delete non existing reservation");
-                        new manage_room(x);
-                        ff.setVisible(false);
-                    }
+                } else {                    
+                        JOptionPane.showMessageDialog(dialogframe,  d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem()));                     
                 }
             } else if (evt.getSource() == backButtonForFrameFF) {
                 ff.setVisible(false);
