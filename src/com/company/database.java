@@ -416,7 +416,7 @@ public class database {
 
     public String CheckDate(int id, String enter, String checkout) {
         String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date <= '" + enter + "' AND " +
-                "chekout_date   >= '" + checkout + "' OR enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
+                "chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
@@ -438,7 +438,7 @@ public class database {
         ArrayList<Integer> a = new ArrayList<>();
         while (id < 13) {
             String query = "SELECT * FROM reservation WHERE  enter_date <= '" + enter + "' AND " +
-                    "chekout_date   >= '" + checkout + "' OR enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
+                    "chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
             try (Connection conn = this.connect();
             ) {
                 Statement stmt = conn.createStatement();
