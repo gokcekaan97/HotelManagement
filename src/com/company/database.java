@@ -419,8 +419,11 @@ public class database {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                if (id == rs.getInt("room"))
+                if (id == rs.getInt("room")) {
                     return "room is full";
+                }else {
+                	return "error";
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -430,7 +433,7 @@ public class database {
 
     public List<Integer> CheckDatee(int id, String enter, String checkout) {
         ArrayList<Integer> a = new ArrayList<>();
-        while (id < 5) {
+        while (id < 13) {
             String query = "SELECT * FROM reservation WHERE  enter_date <= '" + enter + "' AND " +
                     "chekout_date   >= '" + checkout + "' OR enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
             try (Connection conn = this.connect();
@@ -452,5 +455,3 @@ public class database {
         return a;
     }
 }
-
-

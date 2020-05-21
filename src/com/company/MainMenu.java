@@ -23,10 +23,12 @@ public class MainMenu extends Frame implements ActionListener {
 		b2.setBounds(120,120,buttonWidth, buttonHeight);
 		b3.setBounds(120,200, buttonWidth, buttonHeight);
 		b4.setBounds(120,280, buttonWidth, buttonHeight);
+		
 		jf.add(b1);
 		jf.add(b2);
 		jf.add(b3);
 		jf.add(b4);
+		
 		jf.setSize(frameWidth, 400);//increased height room list not show
 		jf.setLayout(null);
 		jf.setVisible(true);
@@ -50,7 +52,7 @@ public class MainMenu extends Frame implements ActionListener {
 			new StartingScreen();
 		}
 		if(evt.getSource()==b4) {
-			d.retrieveRoomTableData();;
+			d.retrieveRoomTableData();
 		}
 	}
 }

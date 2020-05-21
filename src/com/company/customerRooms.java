@@ -30,7 +30,15 @@ public class customerRooms extends Frame implements ActionListener {
     JButton b2 = new JButton("2");
     JButton b3 = new JButton("3");
     JButton b4 = new JButton("4");
-    JButton b6 = new JButton("Search Room");
+    JButton b5 = new JButton("5");
+    JButton b6= new JButton("6");
+    JButton b7 = new JButton("7");
+    JButton b8 = new JButton("8");
+    JButton b9 = new JButton("9");
+    JButton b10 = new JButton("10");
+    JButton b11= new JButton("11");
+    JButton b12= new JButton("12");
+    JButton search = new JButton("Search Room");
     JButton backButtonForFrameF = new JButton("Back");
     JComboBox serch_box ;
     String s1[] = { "all", "1 person", "2 person" };
@@ -59,8 +67,15 @@ public class customerRooms extends Frame implements ActionListener {
         roomsJframe.add(b2);
         roomsJframe.add(b3);
         roomsJframe.add(b4);
-
+        roomsJframe.add(b5);
         roomsJframe.add(b6);
+        roomsJframe.add(b7);
+        roomsJframe.add(b8);
+        roomsJframe.add(b9);
+        roomsJframe.add(b10);
+        roomsJframe.add(b11);
+        roomsJframe.add(b12);
+        roomsJframe.add(search);
         roomsJframe.add(patternList);
         roomsJframe.add(patternList1);
         roomsJframe.setLayout(null);
@@ -78,8 +93,15 @@ public class customerRooms extends Frame implements ActionListener {
         b2.setBounds(100, 120, buttonRoomWidth, buttonRoomHeight);
         b3.setBounds(170, 120, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 120, buttonRoomWidth, buttonRoomHeight);
-        b6.setBounds(310, 120, 145, buttonRoomHeight);
-
+        search.setBounds(310, 60, 145, buttonRoomHeight);
+        b5.setBounds(310, 120, buttonRoomWidth, buttonRoomHeight);
+        b6.setBounds(30, 160, buttonRoomWidth, buttonRoomHeight);
+        b7.setBounds(100, 160, buttonRoomWidth, buttonRoomHeight);
+        b8.setBounds(170, 160, buttonRoomWidth, buttonRoomHeight);
+        b9.setBounds(240, 160, buttonRoomWidth, buttonRoomHeight);
+        b10.setBounds(310, 160, buttonRoomWidth, buttonRoomHeight);
+        b11.setBounds(30, 200, buttonRoomWidth, buttonRoomHeight);
+        b12.setBounds(100, 200, buttonRoomWidth, buttonRoomHeight);
         patternList.setBounds(310, 10, 130, buttonRoomHeight);
         patternList1.setBounds(310, 30, 130, buttonRoomHeight);
         backButtonForFrameF.addActionListener(this);
@@ -87,8 +109,15 @@ public class customerRooms extends Frame implements ActionListener {
         b2.addActionListener(this);
         b3.addActionListener(this);
         b4.addActionListener(this);
+        search.addActionListener(this);
+        b5.addActionListener(this);
         b6.addActionListener(this);
-
+        b7.addActionListener(this);
+        b8.addActionListener(this);
+        b9.addActionListener(this);
+        b10.addActionListener(this);
+        b11.addActionListener(this);
+        b12.addActionListener(this);
 
         //for macs
        /* b1.setOpaque(true);
@@ -123,12 +152,36 @@ public class customerRooms extends Frame implements ActionListener {
         } else if (evt.getSource() == b4) {
             r = new customerManage_room(4);
             roomsJframe.setVisible(false);
+        }else if (evt.getSource() == b5) {
+            r = new customerManage_room(5);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b6) {
+            r = new customerManage_room(6);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b7) {
+            r = new customerManage_room(7);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b8) {
+            r = new customerManage_room(8);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b9) {
+            r = new customerManage_room(9);
+            roomsJframe.setVisible(false);
+        } else if (evt.getSource() == b10) {
+            r = new customerManage_room(10);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b11) {
+            r = new customerManage_room(11);
+            roomsJframe.setVisible(false);
+        }  else if (evt.getSource() == b12) {
+            r = new customerManage_room(12);
+            roomsJframe.setVisible(false);
         }   else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
 
             	frame.setVisible(true);
 
-        }else if (evt.getSource() == b6) {
+        }else if (evt.getSource() == search) {
             List<Integer> myList;
         	System.out.print("gg");
         	b1.setVisible(true);
@@ -151,19 +204,30 @@ public class customerRooms extends Frame implements ActionListener {
                     if(myList.contains(1)) {
                         System.out.print("gg");
                         b1.setVisible(false);
-
                     } if (myList.contains(2)) {
                         b2.setVisible(false);
-
                     }
-
                     if (myList.contains(3)) {
                         b3.setVisible(false);
-
-                    }
+                   }
                     if (myList.contains(4)) {
                         b4.setVisible(false);
-
+                    }if (myList.contains(5)) {
+                        b5.setVisible(false);
+                    }if (myList.contains(6)) {
+                        b6.setVisible(false);
+                    }if (myList.contains(7)) {
+                        b7.setVisible(false);
+                    }if (myList.contains(8)) {
+                        b8.setVisible(false);
+                    }if (myList.contains(9)) {
+                        b9.setVisible(false);
+                    }if (myList.contains(10)) {
+                        b10.setVisible(false);
+                    }if (myList.contains(11)) {
+                        b11.setVisible(false);
+                    }if (myList.contains(12)) {
+                        b12.setVisible(false);
                     }
                 }
             } catch (ParseException e) {

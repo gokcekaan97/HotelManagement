@@ -98,6 +98,7 @@ public class manage_room extends Frame implements ActionListener {
                     if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
 
                         d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
+                        JOptionPane.showMessageDialog(dialogframe, "succecfully deleted");
                         new rooms();
                         ff.setVisible(false);
                     }else if (d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="error"){
