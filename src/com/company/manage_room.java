@@ -95,13 +95,13 @@ public class manage_room extends Frame implements ActionListener {
                 if (diffDays < 0) {
                     JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
                 } else {
-                    if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
+                    if(d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="deleted") {
 
                         d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
                         JOptionPane.showMessageDialog(dialogframe, "succecfully deleted");
                         new rooms();
                         ff.setVisible(false);
-                    }else if (d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="error"){
+                    }else if (d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="couldn't find"){
                         JOptionPane.showMessageDialog(dialogframe, "can't delete non existing reservation");
                         new manage_room(x);
                         ff.setVisible(false);

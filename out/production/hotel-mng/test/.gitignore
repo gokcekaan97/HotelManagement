@@ -2,3 +2,8 @@
 /testCheckRoom.class
 /testLogin.class
 /testPasswordValidation.class
+/testAdminCheck.class
+/testCheckDates.class
+/testGetDates.class
+/testLoginCheck.class
+/testRoomOwner.class

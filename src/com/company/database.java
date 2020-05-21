@@ -21,6 +21,7 @@ public class database {
     JButton button2;
     JButton button3;
     JButton button4;
+    int c;
     JTextField textbox;
     JDialog dialogbox;
     JLabel label;
@@ -356,17 +357,19 @@ public class database {
         return x;
     }
 
-    public void delete(int id,String enter, String checkout) {
+    public String delete(int id,String enter, String checkout) {
 
 
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE FROM reservation where room='"+ id +"' AND enter_date = '" + enter + "' AND chekout_date   = '" + checkout + "'");
-
+            c = stmt.executeUpdate("DELETE FROM reservation where room='" + id + "' AND enter_date = '" + enter + "' AND chekout_date   = '" + checkout + "'");
+            if(c==1)
+                return "deleted";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return "couldn't find";
     }
 
     String name;
