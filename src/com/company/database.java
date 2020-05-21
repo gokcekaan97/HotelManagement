@@ -21,6 +21,7 @@ public class database {
     JButton button2;
     JButton button3;
     JButton button4;
+    int c;
     JTextField textbox;
     JDialog dialogbox;
     JLabel label;
@@ -357,28 +358,20 @@ public class database {
     }
 
     public String delete(int id,String enter, String checkout) {
-boolean a=false;
+
 
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
-            int rs = stmt.executeUpdate("DELETE FROM reservation where room='"+ id +"' AND enter_date = '" + enter + "' AND chekout_date   = '" + checkout + "'");
-            System.out.print(rs);
-            if(rs==1) {
-            	a=true;
-            }else {
-            	a=false;
-        }
+            c = stmt.executeUpdate("DELETE FROM reservation where room='" + id + "' AND enter_date = '" + enter + "' AND chekout_date   = '" + checkout + "'");
+            if(c==1)
+                return "deleted";
         } catch (SQLException e) {
-            System.out.println("asda");
+            System.out.println(e.getMessage());
         }
-        if(a==true) {
-        	return "deleted";
-        }else {
-        	return "not deleted";
+        return "couldn't find";
     }
-        
-    }
+
     String name;
 
     public String get(int id) {
@@ -423,7 +416,7 @@ boolean a=false;
 
     public String CheckDate(int id, String enter, String checkout) {
         String query = "SELECT * FROM reservation WHERE room='" + id + "' AND enter_date <= '" + enter + "' AND " +
-        		"chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
+                "chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
@@ -445,7 +438,7 @@ boolean a=false;
         ArrayList<Integer> a = new ArrayList<>();
         while (id < 13) {
             String query = "SELECT * FROM reservation WHERE  enter_date <= '" + enter + "' AND " +
-            		"chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
+                    "chekout_date   >= '" + checkout + "' OR room='" + id + "' AND enter_date BETWEEN '" + enter + "' AND '" + checkout + "' OR room='" + id + "' AND chekout_date BETWEEN '" + enter + "' AND '" + checkout + "'";
             try (Connection conn = this.connect();
             ) {
                 Statement stmt = conn.createStatement();
