@@ -2,6 +2,8 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.*;
@@ -13,6 +15,7 @@ public class manage_room extends Frame implements ActionListener {
     database d = new database();
     JComboBox patternList;
     JComboBox patternList1;
+    public JFrame dialogframe;
     int x;
     JFrame ff;
 
@@ -29,7 +32,6 @@ public class manage_room extends Frame implements ActionListener {
         ff.add(t);
         ff.add(b7);
         t.setText(d.get(x));
-        System.out.print(d.getDate(x));
         t.setVisible(true);
         ff.add(b6);
         ff.add(backButtonForFrameFF);
@@ -67,18 +69,49 @@ public class manage_room extends Frame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getSource() == b6) {
-            System.out.print(patternList.getSelectedItem());
-            d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
-            new rooms();
-            ff.setVisible(false);
-        } else if (evt.getSource() == b7) {
-            d.delete(x);
-            new rooms();
-            ff.setVisible(false);
-        }  else if (evt.getSource() == backButtonForFrameFF) {
-            ff.setVisible(false);
-            roomsJframe.setVisible(true);
+        try {
+            String a = (String) patternList.getSelectedItem();
+            String aa = (String) patternList1.getSelectedItem();
+            String format = "yyyy/MM/dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            java.util.Date dateObj2 = sdf.parse(aa);
+            java.util.Date dateObj1 = sdf.parse(a);
+            long diff = dateObj2.getTime() - dateObj1.getTime();
+            int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+            if (evt.getSource() == b6) {
+                if (diffDays < 0) {
+                    JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
+                } else {
+                    if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
+                        JOptionPane.showMessageDialog(dialogframe, "Room is full");
+                    }else {
+                        System.out.print(patternList.getSelectedItem());
+                        d.insert(x, t.getText(), x, (String) patternList.getSelectedItem(), (String) patternList1.getSelectedItem());
+                        new rooms();
+                        ff.setVisible(false);
+                    }
+                }
+            } else if (evt.getSource() == b7) {
+                if (diffDays < 0) {
+                    JOptionPane.showMessageDialog(dialogframe, "arrange the date correctly");
+                } else {
+                    if(d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="room is full") {
+
+                        d.delete(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem());
+                        new rooms();
+                        ff.setVisible(false);
+                    }else if (d.CheckDate(x,(String) patternList.getSelectedItem(),(String) patternList1.getSelectedItem())=="error"){
+                        JOptionPane.showMessageDialog(dialogframe, "can't delete non existing reservation");
+                        new manage_room(x);
+                        ff.setVisible(false);
+                    }
+                }
+            } else if (evt.getSource() == backButtonForFrameFF) {
+                ff.setVisible(false);
+                roomsJframe.setVisible(true);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

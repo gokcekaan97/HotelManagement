@@ -30,7 +30,7 @@ public class database {
     Staff s;
 
     private Connection connect() {
-        String url = "jdbc:mysql://192.168.64.2:3306/hotel_mng?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        String url = "jdbc:mysql://localhost:3306/users?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, "root", "");
@@ -356,13 +356,13 @@ public class database {
         return x;
     }
 
-    public void delete(int id) {
+    public void delete(int id,String enter, String checkout) {
 
 
         try (Connection conn = this.connect();
         ) {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("delete  from reservation where room='" + id + "' ");
+            stmt.executeUpdate("DELETE FROM reservation where room='"+ id +"' AND enter_date = '" + enter + "' AND chekout_date   = '" + checkout + "'");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

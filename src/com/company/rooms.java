@@ -18,7 +18,7 @@ public class rooms extends Frame implements ActionListener {
     JButton b2 = new JButton("2");
     JButton b3 = new JButton("3");
     JButton b4 = new JButton("4");
-    JButton b5 = new JButton("check room");
+
     JButton b6 = new JButton("search");
     JButton backButtonForFrameF = new JButton("Back");
     JComboBox serch_box ;
@@ -38,7 +38,7 @@ public class rooms extends Frame implements ActionListener {
         roomsJframe.add(b2);
         roomsJframe.add(b3);
         roomsJframe.add(b4);
-        roomsJframe.add(b5);
+
         roomsJframe.add(b6);
         
         
@@ -56,7 +56,6 @@ public class rooms extends Frame implements ActionListener {
         b2.setBounds(100, 75, buttonRoomWidth, buttonRoomHeight);
         b3.setBounds(170, 75, buttonRoomWidth, buttonRoomHeight);
         b4.setBounds(240, 75, buttonRoomWidth, buttonRoomHeight);
-        b5.setBounds(310, 75, 130, buttonRoomHeight);
         b6.setBounds(380, 50, 130, buttonRoomHeight);
         
         serch_box.setBounds(310, 50, 130, buttonRoomHeight);
@@ -66,7 +65,6 @@ public class rooms extends Frame implements ActionListener {
         b2.addActionListener(this);
         b3.addActionListener(this);
         b4.addActionListener(this);
-        b5.addActionListener(this);
         b6.addActionListener(this);
       
 
@@ -103,28 +101,6 @@ public class rooms extends Frame implements ActionListener {
         } else if (evt.getSource() == b4) {
             r = new manage_room(4);
             roomsJframe.setVisible(false);
-        } else if (evt.getSource() == b5) {
-            if (d.getPoint(1) == 1) {
-                b1.setForeground(Color.red);
-            } else {
-                b1.setForeground(Color.green);
-            }
-            if (d.getPoint(2) == 2) {
-                b2.setForeground(Color.red);
-            } else {
-                b2.setForeground(Color.green);
-            }
-            if (d.getPoint(3) == 3) {
-
-                b3.setForeground(Color.red);
-            } else {
-                b3.setForeground(Color.green);
-            }
-            if (d.getPoint(4) == 4) {
-                b4.setForeground(Color.red);
-            } else {
-                b4.setForeground(Color.green);
-            }
         }  else if (evt.getSource() == backButtonForFrameF) {
             roomsJframe.setVisible(false);
             jf.setVisible(true);
